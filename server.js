@@ -135,7 +135,7 @@ async function handleChat(req, res) {
 
 function serveStatic(req, res) {
   const url = new URL(req.url, `http://${req.headers.host}`);
-  const requestedPath = url.pathname === '/' ? '/troya.html' : decodeURIComponent(url.pathname);
+  const requestedPath = url.pathname === '/' ? '/index.html' : decodeURIComponent(url.pathname);
   const filePath = path.resolve(root, `.${requestedPath}`);
 
   if (!filePath.startsWith(root)) {

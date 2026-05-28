@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TROYA – Domicilios que te dan más</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:  #FF6B00;
+      --orange2: #FF8C2A;
+      --black:   #1A1A1A;
+      --cream:   #FAF5EE;
+      --cream2:  #F3EAD8;
+      --white:   #FFFFFF;
+      --gray:    #6B6B6B;
+      --lgray:   #F0EBE3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--black);
+    }
+
+    /* ───────── NAV ───────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(250,245,238,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,26,26,0.08);
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--black);
+    }
+    /* Icon crop from imagen_troya.jpeg */
+    .logo-icon {
+      width: 52px; height: 52px;
+      overflow: hidden; position: relative; flex-shrink: 0;
+    }
+    .logo-icon img {
+      position: absolute;
+      width: 715px; height: auto;
+      left: -28px; top: -28px;
+    }
+    .nav-brand { line-height: 1; }
+    .nav-brand-name {
+      font-size: 1.25rem; font-weight: 900; letter-spacing: 2px;
+    }
+    .nav-brand-tag {
+      font-size: 0.55rem; font-weight: 600; color: var(--orange);
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
+
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      color: var(--black); text-decoration: none;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--orange); }
+
+    .nav-cta {
+      background: var(--orange); color: var(--white);
+      padding: 10px 24px; border-radius: 6px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+      text-decoration: none; transition: background .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
+
+    /* ───────── HERO ───────── */
+    #hero {
+      min-height: 100vh;
+      padding: 100px 6% 60px;
+      display: flex; align-items: center;
+      background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      position: relative; z-index: 1;
+    }
+
+    .hero-logo-wrap {
+      width: 200px; height: 215px;
+      overflow: hidden; position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .hero-logo-wrap img {
+      position: absolute;
+      width: 715px; height: auto;
+      left: -28px; top: -28px;
+    }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,107,0,0.1);
+      border: 1px solid rgba(255,107,0,0.3);
+      color: var(--orange);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 50px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 900; line-height: 1.08;
+      margin-bottom: 1rem;
+    }
+    .hero-headline em {
+      font-style: normal; color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 1rem; color: var(--gray); line-height: 1.75;
+      max-width: 460px; margin-bottom: 2rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+    .btn-store {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--black); color: var(--white);
+      padding: 12px 22px; border-radius: 10px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+    }
+    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+    .btn-store svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .btn-store-label { line-height: 1; }
+    .btn-store-label span { display: block; font-size: 0.6rem; opacity: .7; }
+    .btn-store-label strong { font-size: 0.88rem; font-weight: 700; }
+
+    .btn-store.orange {
+      background: var(--orange);
+    }
+
+    .hero-stats {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+    }
+    .hstat { border-left: 3px solid var(--orange); padding-left: 12px; }
+    .hstat-n { font-size: 1.5rem; font-weight: 800; }
+    .hstat-l { font-size: 0.7rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+
+    /* phone mockup */
+    .hero-phone {
+      display: flex; justify-content: center; align-items: center;
+    }
+    .phone-frame {
+      width: 260px; height: 520px;
+      background: var(--black); border-radius: 42px;
+      padding: 16px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,107,0,0.3);
+      position: relative;
+    }
+    .phone-notch {
+      width: 80px; height: 22px; background: var(--black);
+      border-radius: 12px; margin: 0 auto 12px;
+      position: relative; z-index: 2;
+    }
+    .phone-screen {
+      background: var(--white); border-radius: 30px;
+      height: calc(100% - 50px);
+      overflow: hidden; display: flex; flex-direction: column;
+    }
+    .phone-header {
+      background: var(--orange); padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .phone-header-logo { font-size: 0.95rem; font-weight: 900; color: white; letter-spacing: 1px; }
+    .phone-search {
+      background: white; margin: 12px; border-radius: 10px;
+      padding: 10px 14px; font-size: 0.72rem; color: #aaa;
+      border: 1px solid #eee; display: flex; align-items: center; gap: 6px;
+    }
+    .phone-search svg { width: 14px; opacity: .5; }
+    .phone-cats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; padding: 4px 12px 12px;
+      flex: 1;
+    }
+    .phone-cat {
+      background: var(--cream); border-radius: 10px;
+      padding: 12px 10px; display: flex; flex-direction: column;
+      align-items: center; gap: 6px; font-size: 0.65rem;
+      font-weight: 600; color: var(--black); text-align: center;
+    }
+    .phone-cat-icon { font-size: 1.4rem; }
+    .phone-pedir {
+      background: var(--orange); color: white; font-size: 0.75rem;
+      font-weight: 700; padding: 12px 16px; text-align: center;
+      letter-spacing: 0.5px; margin: 0 12px 12px; border-radius: 10px;
+    }
+
+    /* ───────── FEATURES BAR ───────── */
+    #features {
+      background: var(--white);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: 1100px; margin: 0 auto;
+    }
+    .feat-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 28px 40px;
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+    .feat-item:last-child { border-right: none; }
+    .feat-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(255,107,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .feat-text h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+    .feat-text p  { font-size: 0.75rem; color: var(--gray); }
+
+    /* ───────── ABOUT ───────── */
+    #about {
+      padding: 100px 6%;
+      background: var(--cream);
+    }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .about-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .about-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    .about-divider { width: 48px; height: 4px; background: var(--orange); border-radius: 2px; margin-bottom: 1.4rem; }
+    .about-text { font-size: 0.95rem; color: var(--gray); line-height: 1.85; margin-bottom: 1.5rem; }
+    .about-highlight {
+      background: var(--white); border-left: 4px solid var(--orange);
+      padding: 1rem 1.5rem; border-radius: 0 10px 10px 0;
+      font-size: 0.92rem; font-weight: 600; color: var(--black); font-style: italic;
+    }
+    .about-image-block {
+      position: relative;
+    }
+    .about-card-main {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .about-card-main h3 { font-size: 1rem; font-weight: 700; color: var(--orange); margin-bottom: 1.25rem; letter-spacing: 1px; text-transform: uppercase; }
+    .about-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .anum-n { font-size: 2rem; font-weight: 900; }
+    .anum-l { font-size: 0.72rem; color: var(--gray); }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--orange);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: white; text-align: center; box-shadow: 0 8px 24px rgba(255,107,0,0.4);
+    }
+    .about-badge strong { font-size: 1.1rem; font-weight: 900; }
+    .about-badge span { font-size: 0.55rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ───────── SERVICIOS ───────── */
+    #servicios {
+      padding: 100px 6%;
+      background: var(--white);
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 0.8rem; }
+    .section-sub { font-size: 0.92rem; color: var(--gray); max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+    .servicios-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .serv-card {
+      background: var(--cream); border-radius: 18px;
+      padding: 2rem 1rem; text-align: center;
+      border: 1.5px solid transparent;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .serv-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(255,107,0,0.12);
+    }
+    .serv-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .serv-name { font-size: 0.85rem; font-weight: 700; }
+
+    /* ───────── BENEFICIOS ───────── */
+    #beneficios {
+      padding: 100px 6%;
+      background: var(--cream);
+    }
+    .bene-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .bene-card {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .bene-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+    .bene-number {
+      font-size: 3.5rem; font-weight: 900; color: rgba(255,107,0,0.12);
+      line-height: 1; margin-bottom: 0.5rem;
+    }
+    .bene-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: rgba(255,107,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
+    }
+    .bene-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .bene-text { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+    /* ───────── PUBLICIDAD ───────── */
+    #publicidad {
+      padding: 100px 6%;
+      background: var(--white);
+    }
+    .pub-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .pub-steps { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .pub-step {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+    }
+    .pub-step-num {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--orange); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 800; flex-shrink: 0;
+    }
+    .pub-step h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+    .pub-step p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+    .pub-visual {
+      background: var(--cream); border-radius: 20px;
+      padding: 2.5rem; text-align: center;
+    }
+    .pub-visual-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .pub-visual h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .pub-visual p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+    /* ───────── DOWNLOAD CTA ───────── */
+    #descarga {
+      padding: 90px 6%;
+      background: var(--black);
+      position: relative; overflow: hidden;
+    }
+    #descarga::before {
+      content: '';
+      position: absolute; left: -100px; top: 50%;
+      transform: translateY(-50%);
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,0,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .descarga-inner {
+      max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
+    }
+    .descarga-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 1rem; }
+    .descarga-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 1rem; }
+    .descarga-title em { font-style: normal; color: var(--orange); }
+    .descarga-sub { font-size: 0.95rem; color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; line-height: 1.7; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .descarga-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .descarga-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+    /* ───────── CONTACTO / FOOTER ───────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 60px 6% 30px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; max-width: 1100px; margin: 0 auto 3rem;
+    }
+    .footer-logo-icon {
+      width: 60px; height: 60px; overflow: hidden; position: relative; margin-bottom: 1rem;
+      filter: brightness(0) invert(1);
+    }
+    .footer-logo-icon img {
+      position: absolute; width: 715px; height: auto; left: -28px; top: -28px;
+    }
+    .footer-brand { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; color: white; margin-bottom: 4px; }
+    .footer-tag { font-size: 0.6rem; font-weight: 600; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 260px; }
+
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul li a, .footer-col ul li {
+      font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--orange); }
+
+    .footer-contact-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.55);
+      margin-bottom: 0.6rem;
+    }
+    .footer-contact-item svg { width: 14px; color: var(--orange); flex-shrink: 0; }
+
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 0.75rem; font-weight: 700;
+      transition: background .2s, color .2s;
+    }
+    .footer-social a:hover { background: var(--orange); color: white; }
+
+    /* ───────── RESPONSIVE ───────── */
+    @media (max-width: 900px) {
+      nav ul { display: none; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-phone { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+      .about-inner, .pub-inner { grid-template-columns: 1fr; }
+      .servicios-grid { grid-template-columns: repeat(3, 1fr); }
+      .bene-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .servicios-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* AI CHATBOX */
+    .ai-chat {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 400;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .ai-chat-panel {
+      position: absolute;
+      right: 0;
+      bottom: 78px;
+      width: min(380px, calc(100vw - 32px));
+      height: min(620px, calc(100vh - 118px));
+      background: var(--white);
+      border: 1px solid rgba(26,26,26,0.1);
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      transform: translateY(12px) scale(.96);
+      transform-origin: bottom right;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+
+    .ai-chat.open .ai-chat-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .ai-chat-head {
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 16px;
+    }
+
+    .ai-chat-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .ai-chat-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      letter-spacing: 0;
+      flex-shrink: 0;
+    }
+
+    .ai-chat-title strong {
+      display: block;
+      font-size: .92rem;
+      line-height: 1.1;
+    }
+
+    .ai-chat-title span {
+      display: block;
+      color: rgba(255,255,255,.58);
+      font-size: .68rem;
+      margin-top: 3px;
+    }
+
+    .ai-chat-close,
+    .ai-chat-toggle,
+    .ai-chat-send {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .ai-chat-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: var(--white);
+      background: rgba(255,255,255,.08);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .ai-chat-messages {
+      padding: 16px;
+      overflow-y: auto;
+      background: linear-gradient(180deg, #FFF 0%, #FAF5EE 100%);
+    }
+
+    .ai-msg {
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .ai-msg.user {
+      justify-content: flex-end;
+    }
+
+    .ai-bubble {
+      max-width: 86%;
+      border-radius: 16px;
+      padding: 11px 13px;
+      font-size: .82rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .ai-msg.bot .ai-bubble {
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid rgba(26,26,26,.08);
+      border-top-left-radius: 5px;
+    }
+
+    .ai-msg.user .ai-bubble {
+      background: var(--orange);
+      color: var(--white);
+      border-top-right-radius: 5px;
+    }
+
+    .ai-chat-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 12px;
+    }
+
+    .ai-chip {
+      border: 1px solid rgba(255,107,0,.24);
+      background: rgba(255,107,0,.08);
+      color: var(--black);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .68rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .ai-typing {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .ai-typing i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: aiPulse 1s infinite ease-in-out;
+    }
+
+    .ai-typing i:nth-child(2) { animation-delay: .12s; }
+    .ai-typing i:nth-child(3) { animation-delay: .24s; }
+
+    @keyframes aiPulse {
+      0%, 80%, 100% { opacity: .28; transform: translateY(0); }
+      40% { opacity: 1; transform: translateY(-3px); }
+    }
+
+    .ai-chat-form {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border-top: 1px solid rgba(26,26,26,.08);
+      background: var(--white);
+    }
+
+    .ai-chat-input {
+      flex: 1;
+      min-width: 0;
+      resize: none;
+      border: 1px solid rgba(26,26,26,.12);
+      border-radius: 12px;
+      padding: 11px 12px;
+      height: 48px;
+      max-height: 110px;
+      font: inherit;
+      font-size: .8rem;
+      line-height: 1.35;
+      outline: none;
+    }
+
+    .ai-chat-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,107,0,.12);
+    }
+
+    .ai-chat-send {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 1.25rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: background .2s, transform .15s;
+    }
+
+    .ai-chat-send:hover { background: var(--orange2); transform: translateY(-1px); }
+    .ai-chat-send:disabled { opacity: .55; cursor: wait; transform: none; }
+
+    .ai-chat-toggle {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: var(--orange);
+      color: var(--white);
+      box-shadow: 0 14px 34px rgba(255,107,0,.38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+
+    .ai-chat-toggle:hover {
+      background: var(--orange2);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(255,107,0,.42);
+    }
+
+    @media (max-width: 560px) {
+      .ai-chat {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .ai-chat-panel {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 88px;
+        width: auto;
+        height: min(560px, calc(100vh - 110px));
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">
+      <img src="imagen_troya.jpeg" alt="TROYA logo"/>
+    </div>
+    <div class="nav-brand">
+      <div class="nav-brand-name">TROYA</div>
+      <div class="nav-brand-tag">Domicilios que te dan más</div>
+    </div>
+  </a>
+
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#descarga">Descarga</a></li>
+  </ul>
+
+  <a class="nav-cta" href="#descarga">Descargar App</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-logo-wrap">
+        <img src="imagen_troya.jpeg" alt="TROYA"/>
+      </div>
+
+      <div class="hero-pill">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#FF6B00"/></svg>
+        Disponible en Cali, Colombia
+      </div>
+
+      <h1 class="hero-headline">
+        Pide fácil,<br>vive <em>más.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Domicilios rápidos, seguros y con beneficios para ti.
+        Conectamos personas, negocios y repartidores con tecnología eficiente.
+      </p>
+
+      <div class="hero-btns">
+        <!-- Google Play -->
+        <a href="#" class="btn-store">
+          <svg viewBox="0 0 512 512" fill="currentColor">
+            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l232.6-233-232.6-78.9zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c17.4-9.9 17.4-34.9-.2-60.8zm-218.8 40.4L47 512c1.7.8 3.5 1.2 5.3 1.2 8 0 15.6-3.4 21.4-8.8l259-259-26.3-25.4z"/>
+          </svg>
+          <div class="btn-store-label">
+            <span>Disponible en</span>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+        <!-- App Store -->
+        <a href="#" class="btn-store orange">
+          <svg viewBox="0 0 814 1000" fill="currentColor">
+            <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-164-39.3c-76 0-103.7 40.8-165.9 40.8s-105.2-46.4-149.5-105.8C72.2 754.2 32 680.3 32 592.3c0-0 0-0 0-0 0-132.8 86.3-202.9 170.8-202.9 46.2 0 89.8 30.3 119.2 30.3 28.1 0 73.6-33.5 130.5-33.5z"/>
+            <path d="M555.5 2c-13.3 0-33.7 8.5-53.1 18.9-18.3 9.7-35.8 25-47.5 45.3-8.5 14.6-13.4 31.3-13.4 47.3 0 2.2.2 4.3.5 6.2 2.4.2 4.9.4 7.5.4 14.5 0 31.4-7.8 44.4-18 14.6-11.3 26-27.4 31.3-44.6 3.5-10.9 5.5-22.2 5.5-33.7 0-6.5-.9-12.8-2.5-18.7l-12.7-.1z"/>
+          </svg>
+          <div class="btn-store-label">
+            <span>Disponible en</span>
+            <strong>App Store</strong>
+          </div>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-n">24/7</div>
+          <div class="hstat-l">Servicio continuo</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n">0%</div>
+          <div class="hstat-l">Barrera de entrada</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n">Cali</div>
+          <div class="hstat-l">Ciudad de operación</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="hero-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-header-logo">TROYA</div>
+            <svg width="18" height="18" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div class="phone-search">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            ¿Qué necesitas hoy?
+          </div>
+          <div class="phone-cats">
+            <div class="phone-cat"><div class="phone-cat-icon">🍔</div>Comida</div>
+            <div class="phone-cat"><div class="phone-cat-icon">🛒</div>Supermercado</div>
+            <div class="phone-cat"><div class="phone-cat-icon">💊</div>Farmacia</div>
+            <div class="phone-cat"><div class="phone-cat-icon">📦</div>Paquetes</div>
+          </div>
+          <div class="phone-pedir">Pedir ahora →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES BAR ─── -->
+<section id="features">
+  <div class="features-grid">
+    <div class="feat-item">
+      <div class="feat-icon">🚀</div>
+      <div class="feat-text">
+        <h3>Entregas Rápidas</h3>
+        <p>Siempre a tiempo, en toda la ciudad</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-text">
+        <h3>Seguro y Confiable</h3>
+        <p>Cuidamos lo que es tuyo</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">🎁</div>
+      <div class="feat-text">
+        <h3>Beneficios Exclusivos</h3>
+        <p>Descuentos y promociones para ti</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about-inner">
+    <div>
+      <div class="about-label">¿Quiénes somos?</div>
+      <h2 class="about-title">Más que domicilios,<br>oportunidades para ti.</h2>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        Somos una app de domicilios rápidos y seguros que conecta personas, negocios
+        y repartidores. Además, te ofrecemos beneficios exclusivos por ayudarnos a crecer.
+      </p>
+      <p class="about-text">
+        Nacimos en Cali con el propósito de facilitar la vida de las personas mediante
+        entregas rápidas y seguras, mientras creamos oportunidades para que cualquier
+        usuario pueda recibir descuentos y beneficios.
+      </p>
+      <div class="about-highlight">
+        "Cualquier persona puede obtener beneficios promocionando TROYA — sin necesidad de ser influencer."
+      </div>
+    </div>
+    <div class="about-image-block">
+      <div class="about-card-main">
+        <h3>En Números</h3>
+        <div class="about-nums">
+          <div>
+            <div class="anum-n" style="color:var(--orange)">Cali</div>
+            <div class="anum-l">Ciudad principal</div>
+          </div>
+          <div>
+            <div class="anum-n">24/7</div>
+            <div class="anum-l">Disponibilidad</div>
+          </div>
+          <div>
+            <div class="anum-n">5+</div>
+            <div class="anum-l">Categorías</div>
+          </div>
+          <div>
+            <div class="anum-n" style="color:var(--orange)">∞</div>
+            <div class="anum-l">Beneficios</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-badge">
+        <strong>COL</strong>
+        <span>OMbia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICIOS ─── -->
+<section id="servicios">
+  <div class="section-header">
+    <div class="section-label">Lo que pedís</div>
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <p class="section-sub">Todo lo que necesitas, entregado rápido y seguro en tu puerta.</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="serv-card">
+      <div class="serv-icon">🍔</div>
+      <div class="serv-name">Comida</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🛒</div>
+      <div class="serv-name">Supermercado</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">💊</div>
+      <div class="serv-name">Farmacia</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">📦</div>
+      <div class="serv-name">Paquetes y documentos</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">✨</div>
+      <div class="serv-name">Lo que necesites</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BENEFICIOS ─── -->
+<section id="beneficios">
+  <div class="section-header">
+    <div class="section-label">Para ti</div>
+    <h2 class="section-title">Beneficios Exclusivos</h2>
+    <p class="section-sub">TROYA es la única app donde pedir un domicilio también te genera recompensas.</p>
+  </div>
+  <div class="bene-grid">
+    <div class="bene-card">
+      <div class="bene-number">01</div>
+      <div class="bene-icon">💸</div>
+      <div class="bene-title">Descuentos Exclusivos</div>
+      <p class="bene-text">Accede a precios especiales y descuentos únicos disponibles solo para usuarios de la app TROYA.</p>
+    </div>
+    <div class="bene-card">
+      <div class="bene-number">02</div>
+      <div class="bene-icon">🎉</div>
+      <div class="bene-title">Promociones Especiales</div>
+      <p class="bene-text">Recibe promociones personalizadas según tus pedidos más frecuentes y las tiendas que más visitas.</p>
+    </div>
+    <div class="bene-card">
+      <div class="bene-number">03</div>
+      <div class="bene-icon">📣</div>
+      <div class="bene-title">Publicidad con Recompensas</div>
+      <p class="bene-text">Sistema único: comparte TROYA con tus contactos y gana beneficios sin necesidad de ser influencer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PUBLICIDAD INCLUSIVA ─── -->
+<section id="publicidad">
+  <div class="pub-inner">
+    <div>
+      <div class="about-label">Modelo único</div>
+      <h2 class="about-title">Publicidad accesible<br>para <em style="font-style:normal;color:var(--orange)">todos</em></h2>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        En TROYA no necesitas miles de seguidores para ganar. Nuestro modelo
+        de publicidad inclusiva permite que cualquier persona obtenga beneficios
+        ayudando a crecer la comunidad.
+      </p>
+      <div class="pub-steps">
+        <div class="pub-step">
+          <div class="pub-step-num">1</div>
+          <div>
+            <h4>Descarga la app</h4>
+            <p>Disponible en Google Play y App Store, gratis y sin costo de registro.</p>
+          </div>
+        </div>
+        <div class="pub-step">
+          <div class="pub-step-num">2</div>
+          <div>
+            <h4>Comparte con tu comunidad</h4>
+            <p>Recomienda TROYA a amigos, familia o en tus redes sociales.</p>
+          </div>
+        </div>
+        <div class="pub-step">
+          <div class="pub-step-num">3</div>
+          <div>
+            <h4>Gana beneficios</h4>
+            <p>Recibe descuentos, promociones y recompensas exclusivas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pub-visual">
+      <div class="pub-visual-icon">🏆</div>
+      <h3>¿Por qué TROYA?</h3>
+      <p>Somos la única plataforma de domicilios en Cali que combina entregas rápidas con un sistema de beneficios inclusivo para toda la comunidad.</p>
+      <br>
+      <p style="color:var(--orange);font-weight:700;font-size:0.85rem;">
+        "Sin barreras. Sin requisitos de seguidores.<br>Solo TROYA."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DESCARGA CTA ─── -->
+<section id="descarga">
+  <div class="descarga-inner">
+    <div class="descarga-tag">Descárgala ya</div>
+    <h2 class="descarga-title">
+      Pide hoy, recibe rápido<br>y <em>gana más.</em>
+    </h2>
+    <p class="descarga-sub">
+      Descarga TROYA y disfruta de todos los beneficios.<br>
+      Domicilios seguros, rápidos y con recompensas para ti.
+    </p>
+    <div class="descarga-btns">
+      <a href="#" class="btn-store" style="background:#FF6B00">
+        <svg viewBox="0 0 512 512" width="22" height="22" fill="white">
+          <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l232.6-233-232.6-78.9zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c17.4-9.9 17.4-34.9-.2-60.8zm-218.8 40.4L47 512c1.7.8 3.5 1.2 5.3 1.2 8 0 15.6-3.4 21.4-8.8l259-259-26.3-25.4z"/>
+        </svg>
+        <div class="btn-store-label">
+          <span>Disponible en</span>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+      <a href="#" class="btn-store" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)">
+        <svg viewBox="0 0 814 1000" width="22" height="22" fill="white">
+          <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-164-39.3c-76 0-103.7 40.8-165.9 40.8s-105.2-46.4-149.5-105.8C72.2 754.2 32 680.3 32 592.3c0-132.8 86.3-202.9 170.8-202.9 46.2 0 89.8 30.3 119.2 30.3 28.1 0 73.6-33.5 130.5-33.5z"/>
+          <path d="M555.5 2c-13.3 0-33.7 8.5-53.1 18.9-18.3 9.7-35.8 25-47.5 45.3-8.5 14.6-13.4 31.3-13.4 47.3 0 2.2.2 4.3.5 6.2 2.4.2 4.9.4 7.5.4 14.5 0 31.4-7.8 44.4-18 14.6-11.3 26-27.4 31.3-44.6 3.5-10.9 5.5-22.2 5.5-33.7 0-6.5-.9-12.8-2.5-18.7l-12.7-.1z"/>
+        </svg>
+        <div class="btn-store-label">
+          <span>Disponible en</span>
+          <strong>App Store</strong>
+        </div>
+      </a>
+    </div>
+    <p class="descarga-note">Gratis · Cali, Colombia · @troya.app</p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-icon">
+        <img src="imagen_troya.jpeg" alt="TROYA"/>
+      </div>
+      <div class="footer-brand">TROYA</div>
+      <div class="footer-tag">Domicilios que te dan más</div>
+      <p class="footer-desc">La app de domicilios que conecta Cali con rapidez, tecnología y beneficios para todos.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li>Comida</li>
+        <li>Supermercado</li>
+        <li>Farmacia</li>
+        <li>Paquetes</li>
+        <li>Lo que necesites</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#about">Nosotros</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#publicidad">Publicidad</a></li>
+        <li><a href="#descarga">Descarga</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +57 300 123 4567
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hola@troyaapp.com
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        www.troyaapp.com
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cali, Colombia
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TROYA APP · Todos los derechos reservados</p>
+    <div class="footer-social">
+      <a href="#">IG</a>
+      <a href="#">FB</a>
+      <a href="#">TK</a>
+    </div>
+  </div>
+</footer>
+
+<!-- AI CHATBOX -->
+<div class="ai-chat" id="aiChat">
+  <div class="ai-chat-panel" role="dialog" aria-label="Chat inteligente TROYA">
+    <div class="ai-chat-head">
+      <div class="ai-chat-title">
+        <div class="ai-chat-avatar">AI</div>
+        <div>
+          <strong>Asistente TROYA</strong>
+          <span>Pregunta cualquier cosa</span>
+        </div>
+      </div>
+      <button class="ai-chat-close" type="button" id="aiChatClose" aria-label="Cerrar chat">&times;</button>
+    </div>
+
+    <div class="ai-chat-messages" id="aiChatMessages" aria-live="polite">
+      <div class="ai-msg bot">
+        <div class="ai-bubble">¡Hola! 👋 Soy el asistente de TROYA. Puedo contarte todo sobre nuestra app: servicios, beneficios, cómo ganar recompensas, cómo ser repartidor o unir tu negocio. ¿En qué te ayudo?</div>
+      </div>
+      <div class="ai-chat-suggestions" id="aiChatSuggestions">
+        <button class="ai-chip" type="button">¿Qué es TROYA?</button>
+        <button class="ai-chip" type="button">¿Cómo gano beneficios?</button>
+        <button class="ai-chip" type="button">¿Cómo descargo la app?</button>
+        <button class="ai-chip" type="button">Quiero ser repartidor</button>
+      </div>
+    </div>
+
+    <form class="ai-chat-form" id="aiChatForm">
+      <textarea class="ai-chat-input" id="aiChatInput" rows="1" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta"></textarea>
+      <button class="ai-chat-send" type="submit" id="aiChatSend" aria-label="Enviar">></button>
+    </form>
+  </div>
+
+  <button class="ai-chat-toggle" type="button" id="aiChatToggle" aria-label="Abrir chat">AI</button>
+</div>
+
+<script>
+  (function () {
+    const chat = document.getElementById('aiChat');
+    const toggle = document.getElementById('aiChatToggle');
+    const close = document.getElementById('aiChatClose');
+    const form = document.getElementById('aiChatForm');
+    const input = document.getElementById('aiChatInput');
+    const send = document.getElementById('aiChatSend');
+    const messagesEl = document.getElementById('aiChatMessages');
+    const suggestions = document.getElementById('aiChatSuggestions');
+
+    const systemPrompt = [
+      'Eres TroyaBot, el asistente oficial de TROYA, app de domicilios y beneficios en Cali, Colombia.',
+      'Tagline: DOMICILIOS QUE TE DAN MAS.',
+      'Servicios: Comida, Supermercado, Farmacia, Paquetes y documentos, Lo que necesites.',
+      'Beneficios: Descuentos exclusivos, Promociones especiales, Sistema de publicidad con recompensas para cualquier usuario sin necesidad de ser influencer.',
+      'Mision: Brindar domicilios rapidos, seguros y confiables conectando usuarios, comercios y repartidores, impulsando publicidad accesible donde cualquier persona gana beneficios.',
+      'Vision: Ser la app de domicilios mas reconocida e innovadora de Colombia.',
+      'Contacto: +57 300 123 4567 | hola@troyaapp.com | www.troyaapp.com | Cali, Colombia | @troya.app.',
+      'Descarga: Google Play y App Store, gratis.',
+      'Modelo de publicidad inclusiva: descarga la app, comparte con tu comunidad, gana beneficios y descuentos.',
+      'Objetivo general: app de domicilios innovadora con entregas rapidas y beneficios accesibles para todos en Cali.',
+      'Responde siempre en espanol claro, amigable y util. Prioriza informacion sobre TROYA. Para temas ajenos, ayuda brevemente y redirige a TROYA cuando tenga sentido.'
+    ].join(' ');
+
+    const conversation = [
+      { role: 'system', content: systemPrompt }
+    ];
+
+    function setOpen(isOpen) {
+      chat.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) setTimeout(() => input.focus(), 120);
+    }
+
+    function scrollMessages() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addMessage(role, text, options) {
+      const msg = document.createElement('div');
+      msg.className = 'ai-msg ' + role;
+      if (options && options.loading) msg.dataset.loading = 'true';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-bubble';
+      bubble.textContent = text;
+      msg.appendChild(bubble);
+      messagesEl.appendChild(msg);
+      scrollMessages();
+      return msg;
+    }
+
+    function addTyping() {
+      const msg = document.createElement('div');
+      msg.className = 'ai-msg bot';
+      msg.dataset.loading = 'true';
+      msg.innerHTML = '<div class="ai-bubble"><span class="ai-typing" aria-label="Pensando"><i></i><i></i><i></i></span></div>';
+      messagesEl.appendChild(msg);
+      scrollMessages();
+      return msg;
+    }
+
+    function responseToText(response) {
+      if (typeof response === 'string') return response;
+
+      const content = response && response.message && response.message.content;
+      if (typeof content === 'string') return content;
+      if (Array.isArray(content)) {
+        return content.map(function (item) {
+          if (typeof item === 'string') return item;
+          return item.text || item.content || '';
+        }).join('').trim();
+      }
+
+      if (response && response.choices && response.choices[0] && response.choices[0].message) {
+        return response.choices[0].message.content || '';
+      }
+
+      return response && response.text ? response.text : '';
+    }
+
+    function withTimeout(promise, ms) {
+      let timer;
+      const timeout = new Promise(function (_, reject) {
+        timer = setTimeout(function () {
+          reject(new Error('La respuesta tardo demasiado.'));
+        }, ms);
+      });
+
+      return Promise.race([promise, timeout]).finally(function () {
+        clearTimeout(timer);
+      });
+    }
+
+    function currentMessages() {
+      return [conversation[0]].concat(conversation.slice(1).slice(-12));
+    }
+
+    function lastUserQuestion() {
+      for (let i = conversation.length - 1; i >= 0; i -= 1) {
+        if (conversation[i].role === 'user') return conversation[i].content.trim();
+      }
+
+      return '';
+    }
+
+    // ── Base de conocimiento TROYA ──────────────────────────────────────
+    const KB = [
+      {
+        keys: ['qué es troya','que es troya','troya app','cuéntame de troya','cuentame de troya','sobre troya','info de troya','información de troya'],
+        ans: 'TROYA es una app de domicilios en Cali, Colombia 🛵\n\nNuestra propuesta es simple: "DOMICILIOS QUE TE DAN MÁS". Conectamos personas, negocios y repartidores con tecnología eficiente y además te recompensamos por ayudar a crecer la comunidad.\n\n✅ Entregas rápidas y seguras\n✅ Beneficios exclusivos para usuarios\n✅ Sistema de publicidad accesible sin requisitos de seguidores\n\n¿Quieres saber cómo funciona, cuáles son los servicios o cómo ganar beneficios?'
+      },
+      {
+        keys: ['cómo funciona','como funciona','cómo se usa','como se usa','pasos','proceso','hacer un pedido','pedir'],
+        ans: 'Usar TROYA es muy fácil:\n\n1️⃣ Descarga la app gratis en Google Play o App Store\n2️⃣ Crea tu cuenta en minutos\n3️⃣ Elige lo que necesitas: comida, supermercado, farmacia, paquetes…\n4️⃣ Un repartidor lo recoge y te lo lleva rápido y seguro\n5️⃣ ¡Gana beneficios y descuentos con cada pedido!\n\n¿Tienes alguna duda del proceso?'
+      },
+      {
+        keys: ['servicios','qué ofrecen','que ofrecen','qué pido','que pido','categorías','categorias','qué puedo pedir','que puedo pedir'],
+        ans: 'En TROYA puedes pedir de todo 📦\n\n🍔 Comida – Restaurantes y antojos\n🛒 Supermercado – Mercado sin salir de casa\n💊 Farmacia – Medicamentos y salud\n📦 Paquetes y documentos – Envíos rápidos\n✨ Lo que necesites – Cualquier encargo especial\n\nTodo entregado rápido, seguro y en tu puerta. ¿Sobre cuál servicio quieres saber más?'
+      },
+      {
+        keys: ['beneficios','descuentos','recompensas','ganancias','ganar','qué gano','que gano','ventajas'],
+        ans: 'Con TROYA ganas más que solo domicilios 🎁\n\n💸 Descuentos exclusivos – Solo para usuarios de la app\n🎉 Promociones especiales – Según tus pedidos frecuentes\n📣 Publicidad con recompensas – Comparte TROYA y gana beneficios sin ser influencer\n\nNuestro modelo es único: cualquier persona puede obtener beneficios ayudando a crecer la comunidad. Sin barreras, sin requisitos de seguidores.'
+      },
+      {
+        keys: ['descargar','descarga','instalar','instala','google play','app store','donde descargo','dónde descargo','cómo descargo','como descargo'],
+        ans: 'Descargar TROYA es gratis 📲\n\n▶️ Google Play: busca "TROYA App" en la Play Store\n🍎 App Store: busca "TROYA App" en el App Store\n\nEs completamente gratis. Solo crea tu cuenta y empieza a pedir con beneficios. ¿Necesitas ayuda para registrarte?'
+      },
+      {
+        keys: ['repartidor','domiciliario','trabajar','trabajo','empleo','unirse','ser repartidor','quiero repartir'],
+        ans: 'Quieres unirte como repartidor TROYA 🏍️\n\nSer parte de nuestro equipo tiene ventajas:\n✅ Horarios flexibles\n✅ Ganas por cada entrega\n✅ Soporte de la plataforma\n✅ Comunidad de repartidores\n\nPara aplicar contáctanos:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n\nNos ponemos en contacto contigo rápidamente.'
+      },
+      {
+        keys: ['negocio','restaurante','tienda','comercio','aliado','registrar negocio','unir negocio','mi negocio','empresa'],
+        ans: 'Registrar tu negocio en TROYA es una gran oportunidad 🏪\n\n¿Por qué unirte?\n✅ Mayor visibilidad en Cali\n✅ Nuevos clientes sin invertir en publicidad propia\n✅ Plataforma digital moderna\n✅ Apoyo a negocios locales\n\nContacta nuestro equipo:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n\n¡Nos encantaría tener tu negocio en TROYA!'
+      },
+      {
+        keys: ['publicidad','promocionar','marketing','referido','compartir','cómo promociono','como promociono','ganar sin seguidores','sin ser influencer'],
+        ans: 'El sistema de publicidad de TROYA es único 📣\n\nAsí funciona:\n1️⃣ Descarga y usa la app\n2️⃣ Comparte TROYA con amigos, familia o en redes\n3️⃣ Cada persona que se una gracias a ti te genera beneficios\n\n🔑 Lo diferente: NO necesitas miles de seguidores. Cualquier persona puede participar y ganar recompensas.\n\n¿Quieres saber exactamente qué beneficios puedes ganar?'
+      },
+      {
+        keys: ['contacto','teléfono','telefono','email','correo','whatsapp','redes sociales','instagram','donde los encuentro','dónde los encuentro'],
+        ans: 'Puedes contactar a TROYA así 📬\n\n📞 Teléfono: +57 300 123 4567\n📧 Email: hola@troyaapp.com\n🌐 Web: www.troyaapp.com\n📍 Ciudad: Cali, Colombia\n📱 Instagram/TikTok: @troya.app\n\n¡Estamos disponibles para ayudarte!'
+      },
+      {
+        keys: ['precio','costo','cuánto cuesta','cuanto cuesta','gratis','cobro','tarifa','cuánto vale','cuanto vale'],
+        ans: 'TROYA es gratis de descargar 🆓\n\nLa app no tiene costo de registro. Pagas únicamente el domicilio de tu pedido, que es muy accesible. Además puedes ganar descuentos y beneficios que reducen aún más el costo.\n\nSin mensualidades, sin cuotas de membresía. ¡Solo pide y gana!'
+      },
+      {
+        keys: ['dónde operan','donde operan','ciudades','cobertura','cali','zonas','barrios','dónde llegan','donde llegan'],
+        ans: 'Por ahora TROYA opera en Cali, Colombia 📍\n\nEstamos creciendo para cubrir más zonas de la ciudad y próximamente más ciudades del país. Nuestra visión es ser la app de domicilios más reconocida de Colombia.\n\n¿Quieres recibir novedades sobre la expansión? Síguenos en @troya.app'
+      },
+      {
+        keys: ['misión','mision','visión','vision','valores','propósito','proposito','quiénes son','quienes son'],
+        ans: 'La misión y visión de TROYA 🎯\n\n🚀 MISIÓN:\nBrindar domicilios rápidos, seguros y confiables, conectando usuarios, comercios y repartidores con tecnología eficiente, impulsando una comunidad de publicidad accesible donde cualquier persona pueda ganar beneficios.\n\n🏆 VISIÓN:\nSer una de las apps de domicilios más reconocidas e innovadoras de Colombia, destacándonos por servicio eficiente y modelo de publicidad inclusiva.\n\n💡 Concepto: Rapidez · Tecnología · Beneficios para todos'
+      },
+      {
+        keys: ['problema','solución','solucion','por qué nació','por que nacio','origen','idea'],
+        ans: 'TROYA nació para resolver un problema real 💡\n\nEn Cali existían pocas apps de domicilios que ofrecieran beneficios accesibles. Las plataformas existentes:\n❌ Solo se enfocaban en entregas\n❌ Ignoraban a la comunidad\n❌ Exigían miles de seguidores para publicitar\n\nTROYA llegó para cambiar eso: entregas rápidas + beneficios para TODOS, sin importar cuántos seguidores tengas.'
+      },
+      {
+        keys: ['seguridad','seguro','confiable','protección','proteccion','confianza','robo','pérdida','perdida'],
+        ans: 'La seguridad es prioridad en TROYA 🔒\n\n✅ Repartidores verificados\n✅ Seguimiento en tiempo real de tu pedido\n✅ Soporte disponible si algo sale mal\n✅ Cuidamos lo que es tuyo durante todo el trayecto\n\nPuedes pedir tranquilo sabiendo que tu pedido llega seguro. ¿Tienes alguna duda específica sobre seguridad?'
+      },
+      {
+        keys: ['hola','buenos días','buenas tardes','buenas noches','hi','hey','saludos'],
+        ans: '¡Hola! 👋 Bienvenido al chat de TROYA.\n\nSoy tu asistente y estoy aquí para ayudarte con:\n• Información sobre la app\n• Cómo pedir domicilios\n• Cómo ganar beneficios\n• Ser repartidor o aliado\n• Contacto con el equipo\n\n¿Con qué te ayudo hoy?'
+      },
+      {
+        keys: ['gracias','muchas gracias','ok gracias','listo','perfecto','excelente'],
+        ans: '¡Con gusto! 😊 Para eso estamos en TROYA.\n\nRecuerda que puedes descargarnos en Google Play y App Store. Cualquier otra duda, aquí estoy. ¡Hasta pronto! 🛵🧡'
+      }
+    ];
+
+    function localAssistantAnswer(question) {
+      const text = question.toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '') // quitar tildes
+        .trim();
+
+      if (!text) {
+        return '¡Hola! Estoy aquí para responder todo sobre TROYA 🛵 ¿Qué quieres saber? Puedes preguntar sobre servicios, beneficios, cómo descargar la app, ser repartidor, unir tu negocio o contactarnos.';
+      }
+
+      // Buscar en la base de conocimiento
+      for (const entry of KB) {
+        for (const key of entry.keys) {
+          const cleanKey = key.normalize('NFD').replace(/[̀-ͯ]/g, '');
+          if (text.includes(cleanKey)) return entry.ans;
+        }
+      }
+
+      // Palabras sueltas de respaldo
+      if (/(troya|app|domicilio|entrega|pedido)/.test(text)) {
+        return 'TROYA es tu app de domicilios en Cali con beneficios para todos 🛵\n\nPuedo contarte sobre:\n• Servicios disponibles\n• Cómo ganar descuentos y recompensas\n• Cómo descargar la app\n• Cómo unirte como repartidor o negocio\n\n¿Qué te interesa saber?';
+      }
+
+      if (/(precio|costo|cuesta|gratis|cobr|tarif)/.test(text)) {
+        return 'La app TROYA es gratis 🆓 Solo pagas el domicilio de tu pedido, sin mensualidades ni cuotas. ¡Y además puedes ganar descuentos que lo hacen aún más económico!';
+      }
+
+      if (/(repartidor|domiciliario|trabajo|empleo|trabajar|ganar plata|dinero)/.test(text)) {
+        return 'Para unirte como repartidor TROYA contacta nuestro equipo:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n\n¡Horarios flexibles y ganas por cada entrega!';
+      }
+
+      if (/(negocio|restaurante|tienda|comercio|aliado)/.test(text)) {
+        return 'Para registrar tu negocio en TROYA y llegar a más clientes en Cali, escríbenos:\n📧 hola@troyaapp.com\n📞 +57 300 123 4567\n\n¡Apoyamos a los negocios locales!';
+      }
+
+      if (/(contac|teléfon|telefon|email|correo|whatsapp|redes|instagram)/.test(text)) {
+        return '📬 Contacta a TROYA:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n📱 @troya.app';
+      }
+
+      // Respuesta genérica útil
+      return 'Gracias por escribirnos 🧡 Puedo ayudarte con información sobre TROYA. Aquí algunas cosas que puedo contarte:\n\n• ¿Qué es TROYA y cómo funciona?\n• Servicios disponibles\n• Cómo ganar beneficios y descuentos\n• Cómo descargar la app\n• Ser repartidor o registrar tu negocio\n• Contacto con el equipo\n\n¿Cuál de estos temas te interesa?';
+    }
+
+    function localChatResponse() {
+      return {
+        choices: [
+          {
+            message: {
+              role: 'assistant',
+              content: localAssistantAnswer(lastUserQuestion())
+            }
+          }
+        ]
+      };
+    }
+
+    async function askAI() {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: currentMessages() })
+      });
+
+      if (!response.ok) {
+        return localChatResponse();
+      }
+
+      return await response.json();
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question || send.disabled) return;
+
+      if (suggestions) suggestions.remove();
+      addMessage('user', question);
+      conversation.push({ role: 'user', content: question });
+      input.value = '';
+      input.style.height = '48px';
+      send.disabled = true;
+
+      const loading = addTyping();
+      const patienceNote = setTimeout(function () {
+        const bubble = loading.querySelector('.ai-bubble');
+        if (bubble) bubble.textContent = 'Sigo trabajando la respuesta para no dejarte frenado...';
+      }, 9000);
+
+      try {
+        const response = await withTimeout(askAI(), 30000);
+        const answer = responseToText(response) || 'Puedo ayudarte a avanzar: reformula la pregunta con un poco mas de contexto y te doy una respuesta mas precisa.';
+        loading.remove();
+        addMessage('bot', answer);
+        conversation.push({ role: 'assistant', content: answer });
+      } catch (error) {
+        loading.remove();
+        const answer = localAssistantAnswer(question);
+        addMessage('bot', answer);
+        conversation.push({ role: 'assistant', content: answer });
+      } finally {
+        clearTimeout(patienceNote);
+        send.disabled = false;
+        input.focus();
+      }
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!chat.classList.contains('open'));
+    });
+
+    close.addEventListener('click', function () {
+      setOpen(false);
+    });
+
+    form.addEventListener('submit', handleSubmit);
+
+    input.addEventListener('input', function () {
+      input.style.height = '48px';
+      input.style.height = Math.min(input.scrollHeight, 110) + 'px';
+    });
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    document.querySelectorAll('.ai-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        input.value = chip.textContent;
+        form.requestSubmit();
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

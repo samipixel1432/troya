@@ -1,0 +1,13 @@
+{
+  "name": "troya-app",
+  "version": "1.0.0",
+  "description": "TROYA – Domicilios que te dan más · Cali, Colombia",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

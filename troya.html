@@ -1,702 +1,859 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TROYA APP – Domicilios en Cali</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TROYA – Domicilios que te dan más</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --orange: #FF6B00;
-      --orange-light: #FF8C2A;
-      --black: #0D0D0D;
-      --dark: #1A1A1A;
-      --gray: #2E2E2E;
-      --light-gray: #F5F5F5;
-      --white: #FFFFFF;
+      --orange:  #FF6B00;
+      --orange2: #FF8C2A;
+      --black:   #1A1A1A;
+      --cream:   #FAF5EE;
+      --cream2:  #F3EAD8;
+      --white:   #FFFFFF;
+      --gray:    #6B6B6B;
+      --lgray:   #F0EBE3;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: var(--black);
-      color: var(--white);
-      line-height: 1.6;
+      background: var(--cream);
+      color: var(--black);
     }
 
-    /* ── NAV ── */
+    /* ───────── NAV ───────── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(13,13,13,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,107,0,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-      height: 64px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(250,245,238,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,26,26,0.08);
+      height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6%;
     }
 
     .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: 3px;
-      color: var(--white);
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--black);
     }
-    .nav-logo span { color: var(--orange); }
+    /* Icon crop from imagen_troya.jpeg */
+    .logo-icon {
+      width: 52px; height: 52px;
+      overflow: hidden; position: relative; flex-shrink: 0;
+    }
+    .logo-icon img {
+      position: absolute;
+      width: 715px; height: auto;
+      left: -28px; top: -28px;
+    }
+    .nav-brand { line-height: 1; }
+    .nav-brand-name {
+      font-size: 1.25rem; font-weight: 900; letter-spacing: 2px;
+    }
+    .nav-brand-tag {
+      font-size: 0.55rem; font-weight: 600; color: var(--orange);
+      letter-spacing: 1.5px; text-transform: uppercase;
+    }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      color: var(--black); text-decoration: none;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px;
+      transition: color .2s;
     }
-    nav ul li a {
-      color: rgba(255,255,255,0.75);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    nav ul li a:hover { color: var(--orange); }
+    nav ul a:hover { color: var(--orange); }
 
-    /* ── HERO ── */
+    .nav-cta {
+      background: var(--orange); color: var(--white);
+      padding: 10px 24px; border-radius: 6px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;
+      text-decoration: none; transition: background .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--orange2); transform: translateY(-1px); }
+
+    /* ───────── HERO ───────── */
     #hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 100px 5% 60px;
-      position: relative;
-      overflow: hidden;
-      background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(255,107,0,0.18) 0%, transparent 70%),
-                  var(--black);
+      padding: 100px 6% 60px;
+      display: flex; align-items: center;
+      background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; right: -80px; top: 50%;
+      transform: translateY(-50%);
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
-    .hero-badge {
-      display: inline-block;
-      background: rgba(255,107,0,0.12);
-      border: 1px solid rgba(255,107,0,0.4);
-      color: var(--orange);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: 50px;
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+      position: relative; z-index: 1;
+    }
+
+    .hero-logo-wrap {
+      width: 200px; height: 215px;
+      overflow: hidden; position: relative;
       margin-bottom: 1.5rem;
     }
-
-    .hero-title {
-      font-size: clamp(3.5rem, 10vw, 8rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -2px;
-      margin-bottom: 0.5rem;
+    .hero-logo-wrap img {
+      position: absolute;
+      width: 715px; height: auto;
+      left: -28px; top: -28px;
     }
-    .hero-title span { color: var(--orange); }
+
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,107,0,0.1);
+      border: 1px solid rgba(255,107,0,0.3);
+      color: var(--orange);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 50px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 900; line-height: 1.08;
+      margin-bottom: 1rem;
+    }
+    .hero-headline em {
+      font-style: normal; color: var(--orange);
+    }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: rgba(255,255,255,0.55);
-      font-weight: 400;
-      max-width: 560px;
-      margin: 1.2rem auto 2.5rem;
+      font-size: 1rem; color: var(--gray); line-height: 1.75;
+      max-width: 460px; margin-bottom: 2rem;
     }
 
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--orange);
-      color: var(--white);
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 14px 36px;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+
+    .btn-store {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--black); color: var(--white);
+      padding: 12px 22px; border-radius: 10px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
     }
-    .hero-cta:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .btn-store:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+    .btn-store svg { width: 22px; height: 22px; flex-shrink: 0; }
+    .btn-store-label { line-height: 1; }
+    .btn-store-label span { display: block; font-size: 0.6rem; opacity: .7; }
+    .btn-store-label strong { font-size: 0.88rem; font-weight: 700; }
+
+    .btn-store.orange {
+      background: var(--orange);
+    }
 
     .hero-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 4rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: flex; gap: 2rem; flex-wrap: wrap;
     }
-    .stat { text-align: center; }
-    .stat-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--orange);
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+    .hstat { border-left: 3px solid var(--orange); padding-left: 12px; }
+    .hstat-n { font-size: 1.5rem; font-weight: 800; }
+    .hstat-l { font-size: 0.7rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
 
-    /* ── SECTION SHARED ── */
-    section { padding: 90px 5%; }
-
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 0.6rem;
+    /* phone mockup */
+    .hero-phone {
+      display: flex; justify-content: center; align-items: center;
     }
-
-    .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-
-    .section-desc {
-      color: rgba(255,255,255,0.6);
-      font-size: 1rem;
-      max-width: 580px;
-      line-height: 1.75;
-    }
-
-    /* ── PROBLEM ── */
-    #problema {
-      background: var(--dark);
-    }
-    .problema-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .problema-card {
-      background: var(--black);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 12px;
-      padding: 2rem;
-    }
-    .problema-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--orange);
-      margin-bottom: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .problema-card p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.75;
-    }
-
-    /* ── OBJETIVOS ── */
-    #objetivos { background: var(--black); }
-
-    .objetivos-wrap { max-width: 1100px; margin: 0 auto; }
-    .objetivos-header { margin-bottom: 3rem; }
-
-    .objetivo-general {
-      background: linear-gradient(135deg, var(--orange), #CC5500);
-      border-radius: 12px;
-      padding: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-    .objetivo-general h3 {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      opacity: 0.8;
-    }
-    .objetivo-general p {
-      font-size: 1.05rem;
-      font-weight: 500;
-      line-height: 1.7;
-    }
-
-    .objetivos-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-    .obj-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      background: var(--dark);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
-    }
-    .obj-icon {
-      width: 36px;
-      height: 36px;
-      background: rgba(255,107,0,0.12);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1rem;
-    }
-    .obj-text {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.6;
-    }
-
-    /* ── MISION VISION ── */
-    #mision {
-      background: var(--dark);
-    }
-    .mv-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 3rem auto 0;
-    }
-    .mv-card {
-      border-radius: 12px;
-      padding: 2.5rem;
+    .phone-frame {
+      width: 260px; height: 520px;
+      background: var(--black); border-radius: 42px;
+      padding: 16px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,107,0,0.3);
       position: relative;
-      overflow: hidden;
     }
-    .mv-card.mision-card {
-      background: var(--black);
-      border: 1px solid rgba(255,107,0,0.2);
+    .phone-notch {
+      width: 80px; height: 22px; background: var(--black);
+      border-radius: 12px; margin: 0 auto 12px;
+      position: relative; z-index: 2;
     }
-    .mv-card.vision-card {
-      background: var(--black);
-      border: 1px solid rgba(255,255,255,0.08);
+    .phone-screen {
+      background: var(--white); border-radius: 30px;
+      height: calc(100% - 50px);
+      overflow: hidden; display: flex; flex-direction: column;
     }
-    .mv-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
+    .phone-header {
+      background: var(--orange); padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .mv-card.mision-card::before { background: var(--orange); }
-    .mv-card.vision-card::before { background: rgba(255,255,255,0.15); }
+    .phone-header-logo { font-size: 0.95rem; font-weight: 900; color: white; letter-spacing: 1px; }
+    .phone-search {
+      background: white; margin: 12px; border-radius: 10px;
+      padding: 10px 14px; font-size: 0.72rem; color: #aaa;
+      border: 1px solid #eee; display: flex; align-items: center; gap: 6px;
+    }
+    .phone-search svg { width: 14px; opacity: .5; }
+    .phone-cats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; padding: 4px 12px 12px;
+      flex: 1;
+    }
+    .phone-cat {
+      background: var(--cream); border-radius: 10px;
+      padding: 12px 10px; display: flex; flex-direction: column;
+      align-items: center; gap: 6px; font-size: 0.65rem;
+      font-weight: 600; color: var(--black); text-align: center;
+    }
+    .phone-cat-icon { font-size: 1.4rem; }
+    .phone-pedir {
+      background: var(--orange); color: white; font-size: 0.75rem;
+      font-weight: 700; padding: 12px 16px; text-align: center;
+      letter-spacing: 0.5px; margin: 0 12px 12px; border-radius: 10px;
+    }
 
-    .mv-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 1rem;
+    /* ───────── FEATURES BAR ───────── */
+    #features {
+      background: var(--white);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
     }
-    .mv-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: 1100px; margin: 0 auto;
     }
-    .mv-text {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.8;
+    .feat-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 28px 40px;
+      border-right: 1px solid rgba(0,0,0,0.06);
     }
+    .feat-item:last-child { border-right: none; }
+    .feat-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(255,107,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .feat-text h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 2px; }
+    .feat-text p  { font-size: 0.75rem; color: var(--gray); }
 
-    /* ── IDENTIDAD VISUAL ── */
-    #identidad { background: var(--black); }
+    /* ───────── ABOUT ───────── */
+    #about {
+      padding: 100px 6%;
+      background: var(--cream);
+    }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .about-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .about-title { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+    .about-divider { width: 48px; height: 4px; background: var(--orange); border-radius: 2px; margin-bottom: 1.4rem; }
+    .about-text { font-size: 0.95rem; color: var(--gray); line-height: 1.85; margin-bottom: 1.5rem; }
+    .about-highlight {
+      background: var(--white); border-left: 4px solid var(--orange);
+      padding: 1rem 1.5rem; border-radius: 0 10px 10px 0;
+      font-size: 0.92rem; font-weight: 600; color: var(--black); font-style: italic;
+    }
+    .about-image-block {
+      position: relative;
+    }
+    .about-card-main {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem; box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .about-card-main h3 { font-size: 1rem; font-weight: 700; color: var(--orange); margin-bottom: 1.25rem; letter-spacing: 1px; text-transform: uppercase; }
+    .about-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .anum-n { font-size: 2rem; font-weight: 900; }
+    .anum-l { font-size: 0.72rem; color: var(--gray); }
+    .about-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--orange);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: white; text-align: center; box-shadow: 0 8px 24px rgba(255,107,0,0.4);
+    }
+    .about-badge strong { font-size: 1.1rem; font-weight: 900; }
+    .about-badge span { font-size: 0.55rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
-    .identidad-wrap { max-width: 1100px; margin: 0 auto; }
-    .identidad-header { margin-bottom: 3rem; }
+    /* ───────── SERVICIOS ───────── */
+    #servicios {
+      padding: 100px 6%;
+      background: var(--white);
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: 0.8rem; }
+    .section-sub { font-size: 0.92rem; color: var(--gray); max-width: 500px; margin: 0 auto; line-height: 1.7; }
 
-    .colores {
-      display: flex;
+    .servicios-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 1.25rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .serv-card {
+      background: var(--cream); border-radius: 18px;
+      padding: 2rem 1rem; text-align: center;
+      border: 1.5px solid transparent;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .serv-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(255,107,0,0.12);
+    }
+    .serv-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .serv-name { font-size: 0.85rem; font-weight: 700; }
+
+    /* ───────── BENEFICIOS ───────── */
+    #beneficios {
+      padding: 100px 6%;
+      background: var(--cream);
+    }
+    .bene-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
+      max-width: 1100px; margin: 0 auto;
     }
-    .color-card {
-      flex: 1;
-      min-width: 200px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
+    .bene-card {
+      background: var(--white); border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+      transition: transform .25s, box-shadow .25s;
     }
-    .color-swatch {
-      height: 100px;
+    .bene-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+    .bene-number {
+      font-size: 3.5rem; font-weight: 900; color: rgba(255,107,0,0.12);
+      line-height: 1; margin-bottom: 0.5rem;
     }
-    .color-swatch.negro { background: #0D0D0D; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .color-swatch.naranja { background: linear-gradient(135deg, #FF6B00, #FF8C2A); }
-    .color-swatch.blanco { background: #FFFFFF; }
-    .color-info {
-      background: var(--dark);
-      padding: 1rem 1.25rem;
+    .bene-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      background: rgba(255,107,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
     }
-    .color-name {
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-    .color-desc {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-    }
+    .bene-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .bene-text { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
 
-    .piezas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+    /* ───────── PUBLICIDAD ───────── */
+    #publicidad {
+      padding: 100px 6%;
+      background: var(--white);
     }
-    .pieza-card {
-      background: var(--dark);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      padding: 1.5rem;
-      text-align: center;
+    .pub-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      max-width: 1100px; margin: 0 auto;
     }
-    .pieza-icon {
-      font-size: 2rem;
-      margin-bottom: 0.75rem;
+    .pub-steps { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .pub-step {
+      display: flex; gap: 1.25rem; align-items: flex-start;
     }
-    .pieza-name {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
+    .pub-step-num {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--orange); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 800; flex-shrink: 0;
     }
-    .pieza-desc {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
+    .pub-step h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+    .pub-step p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+    .pub-visual {
+      background: var(--cream); border-radius: 20px;
+      padding: 2.5rem; text-align: center;
     }
+    .pub-visual-icon { font-size: 4rem; margin-bottom: 1rem; }
+    .pub-visual h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .pub-visual p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
 
-    /* ── CONCEPTO ── */
-    #concepto {
-      background: linear-gradient(135deg, rgba(255,107,0,0.08) 0%, rgba(13,13,13,0) 60%), var(--dark);
+    /* ───────── DOWNLOAD CTA ───────── */
+    #descarga {
+      padding: 90px 6%;
+      background: var(--black);
+      position: relative; overflow: hidden;
     }
-    .concepto-wrap {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
+    #descarga::before {
+      content: '';
+      position: absolute; left: -100px; top: 50%;
+      transform: translateY(-50%);
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,0,0.2) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .concepto-pillars {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 3rem;
-      flex-wrap: wrap;
+    .descarga-inner {
+      max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1;
     }
-    .pillar {
-      flex: 1;
-      min-width: 180px;
-      max-width: 260px;
-    }
-    .pillar-num {
-      font-size: 3rem;
-      font-weight: 900;
-      color: rgba(255,107,0,0.2);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .pillar-name {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: var(--orange);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 0.5rem;
-    }
-    .pillar-desc {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.65;
-    }
+    .descarga-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; color: var(--orange); text-transform: uppercase; margin-bottom: 1rem; }
+    .descarga-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; color: white; line-height: 1.1; margin-bottom: 1rem; }
+    .descarga-title em { font-style: normal; color: var(--orange); }
+    .descarga-sub { font-size: 0.95rem; color: rgba(255,255,255,0.55); margin-bottom: 2.5rem; line-height: 1.7; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .descarga-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .descarga-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
 
-    /* ── FOOTER ── */
+    /* ───────── CONTACTO / FOOTER ───────── */
     footer {
       background: var(--black);
       border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 3rem 5%;
-      text-align: center;
+      padding: 60px 6% 30px;
     }
-    .footer-logo {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 0.5rem;
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; max-width: 1100px; margin: 0 auto 3rem;
     }
-    .footer-logo span { color: var(--orange); }
-    .footer-tagline {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
+    .footer-logo-icon {
+      width: 60px; height: 60px; overflow: hidden; position: relative; margin-bottom: 1rem;
+      filter: brightness(0) invert(1);
     }
-    .footer-city {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.25);
+    .footer-logo-icon img {
+      position: absolute; width: 715px; height: auto; left: -28px; top: -28px;
     }
+    .footer-brand { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; color: white; margin-bottom: 4px; }
+    .footer-tag { font-size: 0.6rem; font-weight: 600; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 260px; }
 
-    /* ── DIVIDERS ── */
-    .divider {
-      width: 50px;
-      height: 3px;
-      background: var(--orange);
-      margin: 1rem 0 1.5rem;
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col ul li a, .footer-col ul li {
+      font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .2s;
     }
-    .divider.center { margin: 1rem auto 1.5rem; }
+    .footer-col ul li a:hover { color: var(--orange); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    .footer-contact-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.55);
+      margin-bottom: 0.6rem;
+    }
+    .footer-contact-item svg { width: 14px; color: var(--orange); flex-shrink: 0; }
+
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+    .footer-social { display: flex; gap: 0.75rem; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 0.75rem; font-weight: 700;
+      transition: background .2s, color .2s;
+    }
+    .footer-social a:hover { background: var(--orange); color: white; }
+
+    /* ───────── RESPONSIVE ───────── */
+    @media (max-width: 900px) {
       nav ul { display: none; }
-      .problema-grid { grid-template-columns: 1fr; }
-      .mv-grid { grid-template-columns: 1fr; }
-      .hero-stats { gap: 2rem; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-phone { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .feat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); }
+      .about-inner, .pub-inner { grid-template-columns: 1fr; }
+      .servicios-grid { grid-template-columns: repeat(3, 1fr); }
+      .bene-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .servicios-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">TRO<span>Y</span>A</div>
-    <ul>
-      <li><a href="#problema">Problema</a></li>
-      <li><a href="#objetivos">Objetivos</a></li>
-      <li><a href="#mision">Misión</a></li>
-      <li><a href="#identidad">Identidad</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-badge">Proyecto Empresarial · Cali, Colombia</div>
-    <h1 class="hero-title">TRO<span>Y</span>A<br>APP</h1>
-    <p class="hero-sub">La app de domicilios que conecta Cali con rapidez, tecnología y beneficios para todos.</p>
-    <a href="#objetivos" class="hero-cta">
-      Conocer el proyecto
-      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-    </a>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">Cali</div>
-        <div class="stat-label">Ciudad de operación</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Servicio continuo</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">0%</div>
-        <div class="stat-label">Barrera para participar</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Beneficios para usuarios</div>
-      </div>
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">
+      <img src="imagen_troya.jpeg" alt="TROYA logo"/>
     </div>
-  </section>
-
-  <!-- PROBLEMA / SOLUCIÓN -->
-  <section id="problema">
-    <div class="problema-grid">
-      <div>
-        <div class="section-label">El problema</div>
-        <h2 class="section-title">El sector de domicilios dejaba a muchos atrás</h2>
-        <div class="divider"></div>
-        <p class="section-desc">En Cali, las plataformas de domicilios existentes se enfocan únicamente en las entregas, ignorando oportunidades de participación comunitaria. Los sistemas de publicidad exigen grandes cantidades de seguidores, limitando la inclusión.</p>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div class="problema-card">
-          <h3>Plataformas excluyentes</h3>
-          <p>Muchas apps de domicilios no ofrecen beneficios reales ni para clientes ni para personas interesadas en promocionarlas sin ser influencers.</p>
-        </div>
-        <div class="problema-card">
-          <h3>Publicidad inaccesible</h3>
-          <p>Los sistemas de publicidad tradicionales exigen grandes cantidades de seguidores o requisitos difíciles de cumplir, cerrando puertas a la comunidad.</p>
-        </div>
-        <div class="problema-card" style="border-color: rgba(255,107,0,0.3);">
-          <h3 style="color: var(--white);">La solución: TROYA</h3>
-          <p>Una app de domicilios inclusiva con entregas rápidas y un sistema de beneficios accesible para cualquier persona, sin importar su número de seguidores.</p>
-        </div>
-      </div>
+    <div class="nav-brand">
+      <div class="nav-brand-name">TROYA</div>
+      <div class="nav-brand-tag">Domicilios que te dan más</div>
     </div>
-  </section>
+  </a>
 
-  <!-- OBJETIVOS -->
-  <section id="objetivos">
-    <div class="objetivos-wrap">
-      <div class="objetivos-header">
-        <div class="section-label">Objetivos</div>
-        <h2 class="section-title">Lo que buscamos lograr</h2>
-        <div class="divider"></div>
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#descarga">Descarga</a></li>
+  </ul>
+
+  <a class="nav-cta" href="#descarga">Descargar App</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-logo-wrap">
+        <img src="imagen_troya.jpeg" alt="TROYA"/>
       </div>
-      <div class="objetivo-general">
-        <h3>Objetivo General</h3>
-        <p>Crear una aplicación de domicilios innovadora que ofrezca entregas rápidas y un sistema de beneficios accesible para todos los usuarios en la ciudad de Cali.</p>
+
+      <div class="hero-pill">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#FF6B00"/></svg>
+        Disponible en Cali, Colombia
       </div>
-      <div class="objetivos-list">
-        <div class="obj-item">
-          <div class="obj-icon">🚀</div>
-          <div class="obj-text">Brindar un servicio de domicilios rápido y confiable en toda la ciudad.</div>
+
+      <h1 class="hero-headline">
+        Pide fácil,<br>vive <em>más.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Domicilios rápidos, seguros y con beneficios para ti.
+        Conectamos personas, negocios y repartidores con tecnología eficiente.
+      </p>
+
+      <div class="hero-btns">
+        <!-- Google Play -->
+        <a href="#" class="btn-store">
+          <svg viewBox="0 0 512 512" fill="currentColor">
+            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l232.6-233-232.6-78.9zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c17.4-9.9 17.4-34.9-.2-60.8zm-218.8 40.4L47 512c1.7.8 3.5 1.2 5.3 1.2 8 0 15.6-3.4 21.4-8.8l259-259-26.3-25.4z"/>
+          </svg>
+          <div class="btn-store-label">
+            <span>Disponible en</span>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+        <!-- App Store -->
+        <a href="#" class="btn-store orange">
+          <svg viewBox="0 0 814 1000" fill="currentColor">
+            <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-164-39.3c-76 0-103.7 40.8-165.9 40.8s-105.2-46.4-149.5-105.8C72.2 754.2 32 680.3 32 592.3c0-0 0-0 0-0 0-132.8 86.3-202.9 170.8-202.9 46.2 0 89.8 30.3 119.2 30.3 28.1 0 73.6-33.5 130.5-33.5z"/>
+            <path d="M555.5 2c-13.3 0-33.7 8.5-53.1 18.9-18.3 9.7-35.8 25-47.5 45.3-8.5 14.6-13.4 31.3-13.4 47.3 0 2.2.2 4.3.5 6.2 2.4.2 4.9.4 7.5.4 14.5 0 31.4-7.8 44.4-18 14.6-11.3 26-27.4 31.3-44.6 3.5-10.9 5.5-22.2 5.5-33.7 0-6.5-.9-12.8-2.5-18.7l-12.7-.1z"/>
+          </svg>
+          <div class="btn-store-label">
+            <span>Disponible en</span>
+            <strong>App Store</strong>
+          </div>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-n">24/7</div>
+          <div class="hstat-l">Servicio continuo</div>
         </div>
-        <div class="obj-item">
-          <div class="obj-icon">🏪</div>
-          <div class="obj-text">Apoyar el crecimiento de negocios locales mediante la plataforma digital.</div>
+        <div class="hstat">
+          <div class="hstat-n">0%</div>
+          <div class="hstat-l">Barrera de entrada</div>
         </div>
-        <div class="obj-item">
-          <div class="obj-icon">🎁</div>
-          <div class="obj-text">Crear un sistema de descuentos y beneficios exclusivos para los usuarios.</div>
-        </div>
-        <div class="obj-item">
-          <div class="obj-icon">📣</div>
-          <div class="obj-text">Permitir que cualquier persona participe en la promoción de la aplicación.</div>
-        </div>
-        <div class="obj-item">
-          <div class="obj-icon">🤝</div>
-          <div class="obj-text">Generar una comunidad digital basada en la colaboración y la innovación.</div>
+        <div class="hstat">
+          <div class="hstat-n">Cali</div>
+          <div class="hstat-l">Ciudad de operación</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- MISIÓN Y VISIÓN -->
-  <section id="mision">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <div class="section-label">Propósito</div>
-      <h2 class="section-title">Misión &amp; Visión</h2>
-      <div class="divider"></div>
+    <!-- Phone mockup -->
+    <div class="hero-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-header-logo">TROYA</div>
+            <svg width="18" height="18" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div class="phone-search">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            ¿Qué necesitas hoy?
+          </div>
+          <div class="phone-cats">
+            <div class="phone-cat"><div class="phone-cat-icon">🍔</div>Comida</div>
+            <div class="phone-cat"><div class="phone-cat-icon">🛒</div>Supermercado</div>
+            <div class="phone-cat"><div class="phone-cat-icon">💊</div>Farmacia</div>
+            <div class="phone-cat"><div class="phone-cat-icon">📦</div>Paquetes</div>
+          </div>
+          <div class="phone-pedir">Pedir ahora →</div>
+        </div>
+      </div>
     </div>
-    <div class="mv-grid">
-      <div class="mv-card mision-card">
-        <div class="mv-tag">Misión</div>
-        <div class="mv-title">Lo que somos hoy</div>
-        <p class="mv-text">Brindar un servicio de domicilios rápido, seguro y confiable, conectando usuarios, comercios y repartidores mediante tecnología eficiente, mientras impulsamos una comunidad de publicidad accesible donde cualquier persona pueda obtener beneficios y descuentos promocionando la aplicación Troya.</p>
-      </div>
-      <div class="mv-card vision-card">
-        <div class="mv-tag">Visión</div>
-        <div class="mv-title">Lo que queremos ser</div>
-        <p class="mv-text">Ser una de las aplicaciones de domicilios más reconocidas e innovadoras de Colombia, destacándonos por nuestro servicio eficiente, nuestra cercanía con los usuarios y nuestro modelo de publicidad inclusiva que permite a cualquier persona generar beneficios sin necesidad de ser influencer.</p>
+  </div>
+</section>
+
+<!-- ─── FEATURES BAR ─── -->
+<section id="features">
+  <div class="features-grid">
+    <div class="feat-item">
+      <div class="feat-icon">🚀</div>
+      <div class="feat-text">
+        <h3>Entregas Rápidas</h3>
+        <p>Siempre a tiempo, en toda la ciudad</p>
       </div>
     </div>
-  </section>
-
-  <!-- IDENTIDAD VISUAL -->
-  <section id="identidad">
-    <div class="identidad-wrap">
-      <div class="identidad-header">
-        <div class="section-label">Diseño Gráfico</div>
-        <h2 class="section-title">Identidad Visual</h2>
-        <div class="divider"></div>
-        <p class="section-desc">La marca TROYA fue diseñada bajo un enfoque minimalista, moderno y tecnológico para representar rapidez, eficiencia y facilidad. El logotipo integra la letra "T" con la figura de una moto y un repartidor.</p>
+    <div class="feat-item">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-text">
+        <h3>Seguro y Confiable</h3>
+        <p>Cuidamos lo que es tuyo</p>
       </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">🎁</div>
+      <div class="feat-text">
+        <h3>Beneficios Exclusivos</h3>
+        <p>Descuentos y promociones para ti</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Paleta de colores -->
-      <h3 style="font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.25rem;">Paleta de Colores</h3>
-      <div class="colores">
-        <div class="color-card">
-          <div class="color-swatch negro"></div>
-          <div class="color-info">
-            <div class="color-name">Negro</div>
-            <div class="color-desc">Elegancia, seguridad y profesionalismo. Transmite confianza y estabilidad.</div>
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about-inner">
+    <div>
+      <div class="about-label">¿Quiénes somos?</div>
+      <h2 class="about-title">Más que domicilios,<br>oportunidades para ti.</h2>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        Somos una app de domicilios rápidos y seguros que conecta personas, negocios
+        y repartidores. Además, te ofrecemos beneficios exclusivos por ayudarnos a crecer.
+      </p>
+      <p class="about-text">
+        Nacimos en Cali con el propósito de facilitar la vida de las personas mediante
+        entregas rápidas y seguras, mientras creamos oportunidades para que cualquier
+        usuario pueda recibir descuentos y beneficios.
+      </p>
+      <div class="about-highlight">
+        "Cualquier persona puede obtener beneficios promocionando TROYA — sin necesidad de ser influencer."
+      </div>
+    </div>
+    <div class="about-image-block">
+      <div class="about-card-main">
+        <h3>En Números</h3>
+        <div class="about-nums">
+          <div>
+            <div class="anum-n" style="color:var(--orange)">Cali</div>
+            <div class="anum-l">Ciudad principal</div>
+          </div>
+          <div>
+            <div class="anum-n">24/7</div>
+            <div class="anum-l">Disponibilidad</div>
+          </div>
+          <div>
+            <div class="anum-n">5+</div>
+            <div class="anum-l">Categorías</div>
+          </div>
+          <div>
+            <div class="anum-n" style="color:var(--orange)">∞</div>
+            <div class="anum-l">Beneficios</div>
           </div>
         </div>
-        <div class="color-card">
-          <div class="color-swatch naranja"></div>
-          <div class="color-info">
-            <div class="color-name" style="color: var(--orange);">Naranja</div>
-            <div class="color-desc">Energía, velocidad y dinamismo. Simboliza la rapidez de los domicilios.</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch blanco"></div>
-          <div class="color-info">
-            <div class="color-name">Blanco</div>
-            <div class="color-desc">Limpieza, orden y simplicidad. Mejora la legibilidad y equilibrio visual.</div>
-          </div>
-        </div>
       </div>
+      <div class="about-badge">
+        <strong>COL</strong>
+        <span>OMbia</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Piezas gráficas -->
-      <h3 style="font-size: 0.78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin: 2.5rem 0 1.25rem;">Piezas Gráficas</h3>
-      <div class="piezas-grid">
-        <div class="pieza-card">
-          <div class="pieza-icon">⬡</div>
-          <div class="pieza-name">Logotipo</div>
-          <div class="pieza-desc">Minimalista y tecnológico. Integra la "T" con moto y repartidor. Sans-serif moderno.</div>
+<!-- ─── SERVICIOS ─── -->
+<section id="servicios">
+  <div class="section-header">
+    <div class="section-label">Lo que pedís</div>
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <p class="section-sub">Todo lo que necesitas, entregado rápido y seguro en tu puerta.</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="serv-card">
+      <div class="serv-icon">🍔</div>
+      <div class="serv-name">Comida</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">🛒</div>
+      <div class="serv-name">Supermercado</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">💊</div>
+      <div class="serv-name">Farmacia</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">📦</div>
+      <div class="serv-name">Paquetes y documentos</div>
+    </div>
+    <div class="serv-card">
+      <div class="serv-icon">✨</div>
+      <div class="serv-name">Lo que necesites</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BENEFICIOS ─── -->
+<section id="beneficios">
+  <div class="section-header">
+    <div class="section-label">Para ti</div>
+    <h2 class="section-title">Beneficios Exclusivos</h2>
+    <p class="section-sub">TROYA es la única app donde pedir un domicilio también te genera recompensas.</p>
+  </div>
+  <div class="bene-grid">
+    <div class="bene-card">
+      <div class="bene-number">01</div>
+      <div class="bene-icon">💸</div>
+      <div class="bene-title">Descuentos Exclusivos</div>
+      <p class="bene-text">Accede a precios especiales y descuentos únicos disponibles solo para usuarios de la app TROYA.</p>
+    </div>
+    <div class="bene-card">
+      <div class="bene-number">02</div>
+      <div class="bene-icon">🎉</div>
+      <div class="bene-title">Promociones Especiales</div>
+      <p class="bene-text">Recibe promociones personalizadas según tus pedidos más frecuentes y las tiendas que más visitas.</p>
+    </div>
+    <div class="bene-card">
+      <div class="bene-number">03</div>
+      <div class="bene-icon">📣</div>
+      <div class="bene-title">Publicidad con Recompensas</div>
+      <p class="bene-text">Sistema único: comparte TROYA con tus contactos y gana beneficios sin necesidad de ser influencer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PUBLICIDAD INCLUSIVA ─── -->
+<section id="publicidad">
+  <div class="pub-inner">
+    <div>
+      <div class="about-label">Modelo único</div>
+      <h2 class="about-title">Publicidad accesible<br>para <em style="font-style:normal;color:var(--orange)">todos</em></h2>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        En TROYA no necesitas miles de seguidores para ganar. Nuestro modelo
+        de publicidad inclusiva permite que cualquier persona obtenga beneficios
+        ayudando a crecer la comunidad.
+      </p>
+      <div class="pub-steps">
+        <div class="pub-step">
+          <div class="pub-step-num">1</div>
+          <div>
+            <h4>Descarga la app</h4>
+            <p>Disponible en Google Play y App Store, gratis y sin costo de registro.</p>
+          </div>
         </div>
-        <div class="pieza-card">
-          <div class="pieza-icon">🪪</div>
-          <div class="pieza-name">Tarjeta de Presentación</div>
-          <div class="pieza-desc">Fondo blanco, detalles naranja. Estructura limpia y profesional.</div>
+        <div class="pub-step">
+          <div class="pub-step-num">2</div>
+          <div>
+            <h4>Comparte con tu comunidad</h4>
+            <p>Recomienda TROYA a amigos, familia o en tus redes sociales.</p>
+          </div>
         </div>
-        <div class="pieza-card">
-          <div class="pieza-icon">📋</div>
-          <div class="pieza-name">Volante Publicitario</div>
-          <div class="pieza-desc">Jerarquía visual fuerte. Imagen del celular para mostrar la experiencia digital.</div>
-        </div>
-        <div class="pieza-card">
-          <div class="pieza-icon">📄</div>
-          <div class="pieza-name">Plegable</div>
-          <div class="pieza-desc">Secciones organizadas con iconos. Información detallada sobre servicios y beneficios.</div>
-        </div>
-        <div class="pieza-card">
-          <div class="pieza-icon">📱</div>
-          <div class="pieza-name">Post Redes Sociales</div>
-          <div class="pieza-desc">Impacto visual inmediato. Moto en acción, frases cortas y directas.</div>
+        <div class="pub-step">
+          <div class="pub-step-num">3</div>
+          <div>
+            <h4>Gana beneficios</h4>
+            <p>Recibe descuentos, promociones y recompensas exclusivas.</p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+    <div class="pub-visual">
+      <div class="pub-visual-icon">🏆</div>
+      <h3>¿Por qué TROYA?</h3>
+      <p>Somos la única plataforma de domicilios en Cali que combina entregas rápidas con un sistema de beneficios inclusivo para toda la comunidad.</p>
+      <br>
+      <p style="color:var(--orange);font-weight:700;font-size:0.85rem;">
+        "Sin barreras. Sin requisitos de seguidores.<br>Solo TROYA."
+      </p>
+    </div>
+  </div>
+</section>
 
-  <!-- CONCEPTO DE MARCA -->
-  <section id="concepto">
-    <div class="concepto-wrap">
-      <div class="section-label">Concepto General</div>
-      <h2 class="section-title">Los tres pilares de TROYA</h2>
-      <div class="divider center"></div>
-      <p class="section-desc" style="margin: 0 auto; text-align: center;">Toda la identidad visual fue desarrollada bajo tres conceptos fundamentales que guían cada decisión de diseño y servicio.</p>
-      <div class="concepto-pillars">
-        <div class="pillar">
-          <div class="pillar-num">01</div>
-          <div class="pillar-name">Rapidez</div>
-          <div class="pillar-desc">Entregas ágiles y eficientes que respetan el tiempo del usuario en cada pedido.</div>
+<!-- ─── DESCARGA CTA ─── -->
+<section id="descarga">
+  <div class="descarga-inner">
+    <div class="descarga-tag">Descárgala ya</div>
+    <h2 class="descarga-title">
+      Pide hoy, recibe rápido<br>y <em>gana más.</em>
+    </h2>
+    <p class="descarga-sub">
+      Descarga TROYA y disfruta de todos los beneficios.<br>
+      Domicilios seguros, rápidos y con recompensas para ti.
+    </p>
+    <div class="descarga-btns">
+      <a href="#" class="btn-store" style="background:#FF6B00">
+        <svg viewBox="0 0 512 512" width="22" height="22" fill="white">
+          <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l232.6-233-232.6-78.9zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c17.4-9.9 17.4-34.9-.2-60.8zm-218.8 40.4L47 512c1.7.8 3.5 1.2 5.3 1.2 8 0 15.6-3.4 21.4-8.8l259-259-26.3-25.4z"/>
+        </svg>
+        <div class="btn-store-label">
+          <span>Disponible en</span>
+          <strong>Google Play</strong>
         </div>
-        <div class="pillar">
-          <div class="pillar-num">02</div>
-          <div class="pillar-name">Tecnología</div>
-          <div class="pillar-desc">Plataforma digital moderna que conecta usuarios, comercios y repartidores de forma intuitiva.</div>
+      </a>
+      <a href="#" class="btn-store" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)">
+        <svg viewBox="0 0 814 1000" width="22" height="22" fill="white">
+          <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-164-39.3c-76 0-103.7 40.8-165.9 40.8s-105.2-46.4-149.5-105.8C72.2 754.2 32 680.3 32 592.3c0-132.8 86.3-202.9 170.8-202.9 46.2 0 89.8 30.3 119.2 30.3 28.1 0 73.6-33.5 130.5-33.5z"/>
+          <path d="M555.5 2c-13.3 0-33.7 8.5-53.1 18.9-18.3 9.7-35.8 25-47.5 45.3-8.5 14.6-13.4 31.3-13.4 47.3 0 2.2.2 4.3.5 6.2 2.4.2 4.9.4 7.5.4 14.5 0 31.4-7.8 44.4-18 14.6-11.3 26-27.4 31.3-44.6 3.5-10.9 5.5-22.2 5.5-33.7 0-6.5-.9-12.8-2.5-18.7l-12.7-.1z"/>
+        </svg>
+        <div class="btn-store-label">
+          <span>Disponible en</span>
+          <strong>App Store</strong>
         </div>
-        <div class="pillar">
-          <div class="pillar-num">03</div>
-          <div class="pillar-name">Beneficios</div>
-          <div class="pillar-desc">Sistema inclusivo de descuentos y recompensas accesible para cualquier persona, sin importar su alcance digital.</div>
-        </div>
+      </a>
+    </div>
+    <p class="descarga-note">Gratis · Cali, Colombia · @troya.app</p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-icon">
+        <img src="imagen_troya.jpeg" alt="TROYA"/>
+      </div>
+      <div class="footer-brand">TROYA</div>
+      <div class="footer-tag">Domicilios que te dan más</div>
+      <p class="footer-desc">La app de domicilios que conecta Cali con rapidez, tecnología y beneficios para todos.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li>Comida</li>
+        <li>Supermercado</li>
+        <li>Farmacia</li>
+        <li>Paquetes</li>
+        <li>Lo que necesites</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#about">Nosotros</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#publicidad">Publicidad</a></li>
+        <li><a href="#descarga">Descarga</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +57 300 123 4567
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hola@troyaapp.com
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        www.troyaapp.com
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cali, Colombia
       </div>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">TRO<span>Y</span>A</div>
-    <div class="footer-tagline">Domicilios · Beneficios · Comunidad</div>
-    <div class="footer-city">Cali, Colombia · Proyecto Empresarial 2025</div>
-  </footer>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TROYA APP · Todos los derechos reservados</p>
+    <div class="footer-social">
+      <a href="#">IG</a>
+      <a href="#">FB</a>
+      <a href="#">TK</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

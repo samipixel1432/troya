@@ -460,6 +460,262 @@
       .servicios-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr; }
     }
+
+    /* AI CHATBOX */
+    .ai-chat {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 400;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .ai-chat-panel {
+      position: absolute;
+      right: 0;
+      bottom: 78px;
+      width: min(380px, calc(100vw - 32px));
+      height: min(620px, calc(100vh - 118px));
+      background: var(--white);
+      border: 1px solid rgba(26,26,26,0.1);
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      overflow: hidden;
+      transform: translateY(12px) scale(.96);
+      transform-origin: bottom right;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+
+    .ai-chat.open .ai-chat-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .ai-chat-head {
+      background: var(--black);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 16px;
+    }
+
+    .ai-chat-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .ai-chat-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      letter-spacing: 0;
+      flex-shrink: 0;
+    }
+
+    .ai-chat-title strong {
+      display: block;
+      font-size: .92rem;
+      line-height: 1.1;
+    }
+
+    .ai-chat-title span {
+      display: block;
+      color: rgba(255,255,255,.58);
+      font-size: .68rem;
+      margin-top: 3px;
+    }
+
+    .ai-chat-close,
+    .ai-chat-toggle,
+    .ai-chat-send {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .ai-chat-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: var(--white);
+      background: rgba(255,255,255,.08);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .ai-chat-messages {
+      padding: 16px;
+      overflow-y: auto;
+      background: linear-gradient(180deg, #FFF 0%, #FAF5EE 100%);
+    }
+
+    .ai-msg {
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .ai-msg.user {
+      justify-content: flex-end;
+    }
+
+    .ai-bubble {
+      max-width: 86%;
+      border-radius: 16px;
+      padding: 11px 13px;
+      font-size: .82rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    .ai-msg.bot .ai-bubble {
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid rgba(26,26,26,.08);
+      border-top-left-radius: 5px;
+    }
+
+    .ai-msg.user .ai-bubble {
+      background: var(--orange);
+      color: var(--white);
+      border-top-right-radius: 5px;
+    }
+
+    .ai-chat-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 12px;
+    }
+
+    .ai-chip {
+      border: 1px solid rgba(255,107,0,.24);
+      background: rgba(255,107,0,.08);
+      color: var(--black);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .68rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .ai-typing {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .ai-typing i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: aiPulse 1s infinite ease-in-out;
+    }
+
+    .ai-typing i:nth-child(2) { animation-delay: .12s; }
+    .ai-typing i:nth-child(3) { animation-delay: .24s; }
+
+    @keyframes aiPulse {
+      0%, 80%, 100% { opacity: .28; transform: translateY(0); }
+      40% { opacity: 1; transform: translateY(-3px); }
+    }
+
+    .ai-chat-form {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border-top: 1px solid rgba(26,26,26,.08);
+      background: var(--white);
+    }
+
+    .ai-chat-input {
+      flex: 1;
+      min-width: 0;
+      resize: none;
+      border: 1px solid rgba(26,26,26,.12);
+      border-radius: 12px;
+      padding: 11px 12px;
+      height: 48px;
+      max-height: 110px;
+      font: inherit;
+      font-size: .8rem;
+      line-height: 1.35;
+      outline: none;
+    }
+
+    .ai-chat-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,107,0,.12);
+    }
+
+    .ai-chat-send {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 1.25rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: background .2s, transform .15s;
+    }
+
+    .ai-chat-send:hover { background: var(--orange2); transform: translateY(-1px); }
+    .ai-chat-send:disabled { opacity: .55; cursor: wait; transform: none; }
+
+    .ai-chat-toggle {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: var(--orange);
+      color: var(--white);
+      box-shadow: 0 14px 34px rgba(255,107,0,.38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+
+    .ai-chat-toggle:hover {
+      background: var(--orange2);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(255,107,0,.42);
+    }
+
+    @media (max-width: 560px) {
+      .ai-chat {
+        right: 16px;
+        bottom: 16px;
+      }
+
+      .ai-chat-panel {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 88px;
+        width: auto;
+        height: min(560px, calc(100vh - 110px));
+      }
+    }
   </style>
 </head>
 <body>
@@ -854,6 +1110,352 @@
     </div>
   </div>
 </footer>
+
+<!-- AI CHATBOX -->
+<div class="ai-chat" id="aiChat">
+  <div class="ai-chat-panel" role="dialog" aria-label="Chat inteligente TROYA">
+    <div class="ai-chat-head">
+      <div class="ai-chat-title">
+        <div class="ai-chat-avatar">AI</div>
+        <div>
+          <strong>Asistente TROYA</strong>
+          <span>Pregunta cualquier cosa</span>
+        </div>
+      </div>
+      <button class="ai-chat-close" type="button" id="aiChatClose" aria-label="Cerrar chat">&times;</button>
+    </div>
+
+    <div class="ai-chat-messages" id="aiChatMessages" aria-live="polite">
+      <div class="ai-msg bot">
+        <div class="ai-bubble">¡Hola! 👋 Soy el asistente de TROYA. Puedo contarte todo sobre nuestra app: servicios, beneficios, cómo ganar recompensas, cómo ser repartidor o unir tu negocio. ¿En qué te ayudo?</div>
+      </div>
+      <div class="ai-chat-suggestions" id="aiChatSuggestions">
+        <button class="ai-chip" type="button">¿Qué es TROYA?</button>
+        <button class="ai-chip" type="button">¿Cómo gano beneficios?</button>
+        <button class="ai-chip" type="button">¿Cómo descargo la app?</button>
+        <button class="ai-chip" type="button">Quiero ser repartidor</button>
+      </div>
+    </div>
+
+    <form class="ai-chat-form" id="aiChatForm">
+      <textarea class="ai-chat-input" id="aiChatInput" rows="1" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta"></textarea>
+      <button class="ai-chat-send" type="submit" id="aiChatSend" aria-label="Enviar">></button>
+    </form>
+  </div>
+
+  <button class="ai-chat-toggle" type="button" id="aiChatToggle" aria-label="Abrir chat">AI</button>
+</div>
+
+<script>
+  (function () {
+    const chat = document.getElementById('aiChat');
+    const toggle = document.getElementById('aiChatToggle');
+    const close = document.getElementById('aiChatClose');
+    const form = document.getElementById('aiChatForm');
+    const input = document.getElementById('aiChatInput');
+    const send = document.getElementById('aiChatSend');
+    const messagesEl = document.getElementById('aiChatMessages');
+    const suggestions = document.getElementById('aiChatSuggestions');
+
+    const systemPrompt = [
+      'Eres TroyaBot, el asistente oficial de TROYA, app de domicilios y beneficios en Cali, Colombia.',
+      'Tagline: DOMICILIOS QUE TE DAN MAS.',
+      'Servicios: Comida, Supermercado, Farmacia, Paquetes y documentos, Lo que necesites.',
+      'Beneficios: Descuentos exclusivos, Promociones especiales, Sistema de publicidad con recompensas para cualquier usuario sin necesidad de ser influencer.',
+      'Mision: Brindar domicilios rapidos, seguros y confiables conectando usuarios, comercios y repartidores, impulsando publicidad accesible donde cualquier persona gana beneficios.',
+      'Vision: Ser la app de domicilios mas reconocida e innovadora de Colombia.',
+      'Contacto: +57 300 123 4567 | hola@troyaapp.com | www.troyaapp.com | Cali, Colombia | @troya.app.',
+      'Descarga: Google Play y App Store, gratis.',
+      'Modelo de publicidad inclusiva: descarga la app, comparte con tu comunidad, gana beneficios y descuentos.',
+      'Objetivo general: app de domicilios innovadora con entregas rapidas y beneficios accesibles para todos en Cali.',
+      'Responde siempre en espanol claro, amigable y util. Prioriza informacion sobre TROYA. Para temas ajenos, ayuda brevemente y redirige a TROYA cuando tenga sentido.'
+    ].join(' ');
+
+    const conversation = [
+      { role: 'system', content: systemPrompt }
+    ];
+
+    function setOpen(isOpen) {
+      chat.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) setTimeout(() => input.focus(), 120);
+    }
+
+    function scrollMessages() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addMessage(role, text, options) {
+      const msg = document.createElement('div');
+      msg.className = 'ai-msg ' + role;
+      if (options && options.loading) msg.dataset.loading = 'true';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-bubble';
+      bubble.textContent = text;
+      msg.appendChild(bubble);
+      messagesEl.appendChild(msg);
+      scrollMessages();
+      return msg;
+    }
+
+    function addTyping() {
+      const msg = document.createElement('div');
+      msg.className = 'ai-msg bot';
+      msg.dataset.loading = 'true';
+      msg.innerHTML = '<div class="ai-bubble"><span class="ai-typing" aria-label="Pensando"><i></i><i></i><i></i></span></div>';
+      messagesEl.appendChild(msg);
+      scrollMessages();
+      return msg;
+    }
+
+    function responseToText(response) {
+      if (typeof response === 'string') return response;
+
+      const content = response && response.message && response.message.content;
+      if (typeof content === 'string') return content;
+      if (Array.isArray(content)) {
+        return content.map(function (item) {
+          if (typeof item === 'string') return item;
+          return item.text || item.content || '';
+        }).join('').trim();
+      }
+
+      if (response && response.choices && response.choices[0] && response.choices[0].message) {
+        return response.choices[0].message.content || '';
+      }
+
+      return response && response.text ? response.text : '';
+    }
+
+    function withTimeout(promise, ms) {
+      let timer;
+      const timeout = new Promise(function (_, reject) {
+        timer = setTimeout(function () {
+          reject(new Error('La respuesta tardo demasiado.'));
+        }, ms);
+      });
+
+      return Promise.race([promise, timeout]).finally(function () {
+        clearTimeout(timer);
+      });
+    }
+
+    function currentMessages() {
+      return [conversation[0]].concat(conversation.slice(1).slice(-12));
+    }
+
+    function lastUserQuestion() {
+      for (let i = conversation.length - 1; i >= 0; i -= 1) {
+        if (conversation[i].role === 'user') return conversation[i].content.trim();
+      }
+
+      return '';
+    }
+
+    // ── Base de conocimiento TROYA ──────────────────────────────────────
+    const KB = [
+      {
+        keys: ['qué es troya','que es troya','troya app','cuéntame de troya','cuentame de troya','sobre troya','info de troya','información de troya'],
+        ans: 'TROYA es una app de domicilios en Cali, Colombia 🛵\n\nNuestra propuesta es simple: "DOMICILIOS QUE TE DAN MÁS". Conectamos personas, negocios y repartidores con tecnología eficiente y además te recompensamos por ayudar a crecer la comunidad.\n\n✅ Entregas rápidas y seguras\n✅ Beneficios exclusivos para usuarios\n✅ Sistema de publicidad accesible sin requisitos de seguidores\n\n¿Quieres saber cómo funciona, cuáles son los servicios o cómo ganar beneficios?'
+      },
+      {
+        keys: ['cómo funciona','como funciona','cómo se usa','como se usa','pasos','proceso','hacer un pedido','pedir'],
+        ans: 'Usar TROYA es muy fácil:\n\n1️⃣ Descarga la app gratis en Google Play o App Store\n2️⃣ Crea tu cuenta en minutos\n3️⃣ Elige lo que necesitas: comida, supermercado, farmacia, paquetes…\n4️⃣ Un repartidor lo recoge y te lo lleva rápido y seguro\n5️⃣ ¡Gana beneficios y descuentos con cada pedido!\n\n¿Tienes alguna duda del proceso?'
+      },
+      {
+        keys: ['servicios','qué ofrecen','que ofrecen','qué pido','que pido','categorías','categorias','qué puedo pedir','que puedo pedir'],
+        ans: 'En TROYA puedes pedir de todo 📦\n\n🍔 Comida – Restaurantes y antojos\n🛒 Supermercado – Mercado sin salir de casa\n💊 Farmacia – Medicamentos y salud\n📦 Paquetes y documentos – Envíos rápidos\n✨ Lo que necesites – Cualquier encargo especial\n\nTodo entregado rápido, seguro y en tu puerta. ¿Sobre cuál servicio quieres saber más?'
+      },
+      {
+        keys: ['beneficios','descuentos','recompensas','ganancias','ganar','qué gano','que gano','ventajas'],
+        ans: 'Con TROYA ganas más que solo domicilios 🎁\n\n💸 Descuentos exclusivos – Solo para usuarios de la app\n🎉 Promociones especiales – Según tus pedidos frecuentes\n📣 Publicidad con recompensas – Comparte TROYA y gana beneficios sin ser influencer\n\nNuestro modelo es único: cualquier persona puede obtener beneficios ayudando a crecer la comunidad. Sin barreras, sin requisitos de seguidores.'
+      },
+      {
+        keys: ['descargar','descarga','instalar','instala','google play','app store','donde descargo','dónde descargo','cómo descargo','como descargo'],
+        ans: 'Descargar TROYA es gratis 📲\n\n▶️ Google Play: busca "TROYA App" en la Play Store\n🍎 App Store: busca "TROYA App" en el App Store\n\nEs completamente gratis. Solo crea tu cuenta y empieza a pedir con beneficios. ¿Necesitas ayuda para registrarte?'
+      },
+      {
+        keys: ['repartidor','domiciliario','trabajar','trabajo','empleo','unirse','ser repartidor','quiero repartir'],
+        ans: 'Quieres unirte como repartidor TROYA 🏍️\n\nSer parte de nuestro equipo tiene ventajas:\n✅ Horarios flexibles\n✅ Ganas por cada entrega\n✅ Soporte de la plataforma\n✅ Comunidad de repartidores\n\nPara aplicar contáctanos:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n\nNos ponemos en contacto contigo rápidamente.'
+      },
+      {
+        keys: ['negocio','restaurante','tienda','comercio','aliado','registrar negocio','unir negocio','mi negocio','empresa'],
+        ans: 'Registrar tu negocio en TROYA es una gran oportunidad 🏪\n\n¿Por qué unirte?\n✅ Mayor visibilidad en Cali\n✅ Nuevos clientes sin invertir en publicidad propia\n✅ Plataforma digital moderna\n✅ Apoyo a negocios locales\n\nContacta nuestro equipo:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n\n¡Nos encantaría tener tu negocio en TROYA!'
+      },
+      {
+        keys: ['publicidad','promocionar','marketing','referido','compartir','cómo promociono','como promociono','ganar sin seguidores','sin ser influencer'],
+        ans: 'El sistema de publicidad de TROYA es único 📣\n\nAsí funciona:\n1️⃣ Descarga y usa la app\n2️⃣ Comparte TROYA con amigos, familia o en redes\n3️⃣ Cada persona que se una gracias a ti te genera beneficios\n\n🔑 Lo diferente: NO necesitas miles de seguidores. Cualquier persona puede participar y ganar recompensas.\n\n¿Quieres saber exactamente qué beneficios puedes ganar?'
+      },
+      {
+        keys: ['contacto','teléfono','telefono','email','correo','whatsapp','redes sociales','instagram','donde los encuentro','dónde los encuentro'],
+        ans: 'Puedes contactar a TROYA así 📬\n\n📞 Teléfono: +57 300 123 4567\n📧 Email: hola@troyaapp.com\n🌐 Web: www.troyaapp.com\n📍 Ciudad: Cali, Colombia\n📱 Instagram/TikTok: @troya.app\n\n¡Estamos disponibles para ayudarte!'
+      },
+      {
+        keys: ['precio','costo','cuánto cuesta','cuanto cuesta','gratis','cobro','tarifa','cuánto vale','cuanto vale'],
+        ans: 'TROYA es gratis de descargar 🆓\n\nLa app no tiene costo de registro. Pagas únicamente el domicilio de tu pedido, que es muy accesible. Además puedes ganar descuentos y beneficios que reducen aún más el costo.\n\nSin mensualidades, sin cuotas de membresía. ¡Solo pide y gana!'
+      },
+      {
+        keys: ['dónde operan','donde operan','ciudades','cobertura','cali','zonas','barrios','dónde llegan','donde llegan'],
+        ans: 'Por ahora TROYA opera en Cali, Colombia 📍\n\nEstamos creciendo para cubrir más zonas de la ciudad y próximamente más ciudades del país. Nuestra visión es ser la app de domicilios más reconocida de Colombia.\n\n¿Quieres recibir novedades sobre la expansión? Síguenos en @troya.app'
+      },
+      {
+        keys: ['misión','mision','visión','vision','valores','propósito','proposito','quiénes son','quienes son'],
+        ans: 'La misión y visión de TROYA 🎯\n\n🚀 MISIÓN:\nBrindar domicilios rápidos, seguros y confiables, conectando usuarios, comercios y repartidores con tecnología eficiente, impulsando una comunidad de publicidad accesible donde cualquier persona pueda ganar beneficios.\n\n🏆 VISIÓN:\nSer una de las apps de domicilios más reconocidas e innovadoras de Colombia, destacándonos por servicio eficiente y modelo de publicidad inclusiva.\n\n💡 Concepto: Rapidez · Tecnología · Beneficios para todos'
+      },
+      {
+        keys: ['problema','solución','solucion','por qué nació','por que nacio','origen','idea'],
+        ans: 'TROYA nació para resolver un problema real 💡\n\nEn Cali existían pocas apps de domicilios que ofrecieran beneficios accesibles. Las plataformas existentes:\n❌ Solo se enfocaban en entregas\n❌ Ignoraban a la comunidad\n❌ Exigían miles de seguidores para publicitar\n\nTROYA llegó para cambiar eso: entregas rápidas + beneficios para TODOS, sin importar cuántos seguidores tengas.'
+      },
+      {
+        keys: ['seguridad','seguro','confiable','protección','proteccion','confianza','robo','pérdida','perdida'],
+        ans: 'La seguridad es prioridad en TROYA 🔒\n\n✅ Repartidores verificados\n✅ Seguimiento en tiempo real de tu pedido\n✅ Soporte disponible si algo sale mal\n✅ Cuidamos lo que es tuyo durante todo el trayecto\n\nPuedes pedir tranquilo sabiendo que tu pedido llega seguro. ¿Tienes alguna duda específica sobre seguridad?'
+      },
+      {
+        keys: ['hola','buenos días','buenas tardes','buenas noches','hi','hey','saludos'],
+        ans: '¡Hola! 👋 Bienvenido al chat de TROYA.\n\nSoy tu asistente y estoy aquí para ayudarte con:\n• Información sobre la app\n• Cómo pedir domicilios\n• Cómo ganar beneficios\n• Ser repartidor o aliado\n• Contacto con el equipo\n\n¿Con qué te ayudo hoy?'
+      },
+      {
+        keys: ['gracias','muchas gracias','ok gracias','listo','perfecto','excelente'],
+        ans: '¡Con gusto! 😊 Para eso estamos en TROYA.\n\nRecuerda que puedes descargarnos en Google Play y App Store. Cualquier otra duda, aquí estoy. ¡Hasta pronto! 🛵🧡'
+      }
+    ];
+
+    function localAssistantAnswer(question) {
+      const text = question.toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '') // quitar tildes
+        .trim();
+
+      if (!text) {
+        return '¡Hola! Estoy aquí para responder todo sobre TROYA 🛵 ¿Qué quieres saber? Puedes preguntar sobre servicios, beneficios, cómo descargar la app, ser repartidor, unir tu negocio o contactarnos.';
+      }
+
+      // Buscar en la base de conocimiento
+      for (const entry of KB) {
+        for (const key of entry.keys) {
+          const cleanKey = key.normalize('NFD').replace(/[̀-ͯ]/g, '');
+          if (text.includes(cleanKey)) return entry.ans;
+        }
+      }
+
+      // Palabras sueltas de respaldo
+      if (/(troya|app|domicilio|entrega|pedido)/.test(text)) {
+        return 'TROYA es tu app de domicilios en Cali con beneficios para todos 🛵\n\nPuedo contarte sobre:\n• Servicios disponibles\n• Cómo ganar descuentos y recompensas\n• Cómo descargar la app\n• Cómo unirte como repartidor o negocio\n\n¿Qué te interesa saber?';
+      }
+
+      if (/(precio|costo|cuesta|gratis|cobr|tarif)/.test(text)) {
+        return 'La app TROYA es gratis 🆓 Solo pagas el domicilio de tu pedido, sin mensualidades ni cuotas. ¡Y además puedes ganar descuentos que lo hacen aún más económico!';
+      }
+
+      if (/(repartidor|domiciliario|trabajo|empleo|trabajar|ganar plata|dinero)/.test(text)) {
+        return 'Para unirte como repartidor TROYA contacta nuestro equipo:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n\n¡Horarios flexibles y ganas por cada entrega!';
+      }
+
+      if (/(negocio|restaurante|tienda|comercio|aliado)/.test(text)) {
+        return 'Para registrar tu negocio en TROYA y llegar a más clientes en Cali, escríbenos:\n📧 hola@troyaapp.com\n📞 +57 300 123 4567\n\n¡Apoyamos a los negocios locales!';
+      }
+
+      if (/(contac|teléfon|telefon|email|correo|whatsapp|redes|instagram)/.test(text)) {
+        return '📬 Contacta a TROYA:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n📱 @troya.app';
+      }
+
+      // Respuesta genérica útil
+      return 'Gracias por escribirnos 🧡 Puedo ayudarte con información sobre TROYA. Aquí algunas cosas que puedo contarte:\n\n• ¿Qué es TROYA y cómo funciona?\n• Servicios disponibles\n• Cómo ganar beneficios y descuentos\n• Cómo descargar la app\n• Ser repartidor o registrar tu negocio\n• Contacto con el equipo\n\n¿Cuál de estos temas te interesa?';
+    }
+
+    function localChatResponse() {
+      return {
+        choices: [
+          {
+            message: {
+              role: 'assistant',
+              content: localAssistantAnswer(lastUserQuestion())
+            }
+          }
+        ]
+      };
+    }
+
+    async function askAI() {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: currentMessages() })
+      });
+
+      if (!response.ok) {
+        return localChatResponse();
+      }
+
+      return await response.json();
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question || send.disabled) return;
+
+      if (suggestions) suggestions.remove();
+      addMessage('user', question);
+      conversation.push({ role: 'user', content: question });
+      input.value = '';
+      input.style.height = '48px';
+      send.disabled = true;
+
+      const loading = addTyping();
+      const patienceNote = setTimeout(function () {
+        const bubble = loading.querySelector('.ai-bubble');
+        if (bubble) bubble.textContent = 'Sigo trabajando la respuesta para no dejarte frenado...';
+      }, 9000);
+
+      try {
+        const response = await withTimeout(askAI(), 30000);
+        const answer = responseToText(response) || 'Puedo ayudarte a avanzar: reformula la pregunta con un poco mas de contexto y te doy una respuesta mas precisa.';
+        loading.remove();
+        addMessage('bot', answer);
+        conversation.push({ role: 'assistant', content: answer });
+      } catch (error) {
+        loading.remove();
+        const answer = localAssistantAnswer(question);
+        addMessage('bot', answer);
+        conversation.push({ role: 'assistant', content: answer });
+      } finally {
+        clearTimeout(patienceNote);
+        send.disabled = false;
+        input.focus();
+      }
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!chat.classList.contains('open'));
+    });
+
+    close.addEventListener('click', function () {
+      setOpen(false);
+    });
+
+    form.addEventListener('submit', handleSubmit);
+
+    input.addEventListener('input', function () {
+      input.style.height = '48px';
+      input.style.height = Math.min(input.scrollHeight, 110) + 'px';
+    });
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    document.querySelectorAll('.ai-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        input.value = chip.textContent;
+        form.requestSubmit();
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>

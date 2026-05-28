@@ -297,13 +297,82 @@
       padding: 2rem 1rem; text-align: center;
       border: 1.5px solid transparent;
       transition: border-color .25s, transform .25s, box-shadow .25s;
-      cursor: default;
+      cursor: pointer;
+      position: relative;
     }
     .serv-card:hover {
       border-color: var(--orange);
       transform: translateY(-6px);
       box-shadow: 0 16px 40px rgba(255,107,0,0.12);
     }
+    .serv-card .serv-tap {
+      font-size: 0.68rem; color: var(--orange); font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-top: 0.6rem; opacity: 0.8;
+    }
+
+    /* ── MODAL SERVICIOS ── */
+    .srv-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9000;
+      background: rgba(26,26,26,0.55); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 1.5rem;
+    }
+    .srv-modal-overlay.open { display: flex; }
+    .srv-modal {
+      background: var(--white); border-radius: 24px;
+      max-width: 480px; width: 100%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+      overflow: hidden; animation: srvPop .28s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes srvPop {
+      from { opacity: 0; transform: scale(0.88) translateY(20px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0); }
+    }
+    .srv-modal-head {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange2) 100%);
+      padding: 2rem 2rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .srv-modal-head-icon { font-size: 2.8rem; line-height: 1; }
+    .srv-modal-head-title { color: #fff; font-size: 1.4rem; font-weight: 800; }
+    .srv-modal-head-sub { color: rgba(255,255,255,0.85); font-size: 0.82rem; margin-top: 2px; }
+    .srv-modal-body { padding: 1.8rem 2rem 2rem; }
+    .srv-modal-body ul {
+      list-style: none; display: flex; flex-direction: column; gap: 0.9rem;
+    }
+    .srv-modal-body ul li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.9rem; color: var(--black); line-height: 1.5;
+    }
+    .srv-modal-body ul li .li-icon {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--cream2); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0; margin-top: 1px;
+    }
+    .srv-modal-body ul li .li-text strong {
+      display: block; font-weight: 600; color: var(--black);
+    }
+    .srv-modal-body ul li .li-text span {
+      color: var(--gray); font-size: 0.82rem;
+    }
+    .srv-modal-cta {
+      margin-top: 1.5rem;
+      background: var(--orange); color: #fff;
+      border: none; border-radius: 50px; width: 100%;
+      padding: 0.9rem; font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      transition: background .2s, transform .15s;
+    }
+    .srv-modal-cta:hover { background: var(--orange2); transform: translateY(-2px); }
+    .srv-modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: rgba(255,255,255,0.25); border: none;
+      color: #fff; font-size: 1.2rem; width: 32px; height: 32px;
+      border-radius: 50%; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; font-weight: 700;
+      transition: background .2s;
+    }
+    .srv-modal-close:hover { background: rgba(255,255,255,0.45); }
     .serv-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
     .serv-name { font-size: 0.85rem; font-weight: 700; }
 
@@ -915,27 +984,33 @@
     <p class="section-sub">Todo lo que necesitas, entregado rápido y seguro en tu puerta.</p>
   </div>
   <div class="servicios-grid">
-    <div class="serv-card">
+    <div class="serv-card" onclick="openSrvModal('comida')">
       <div class="serv-icon">🍔</div>
       <div class="serv-name">Comida</div>
+      <div class="serv-tap">Ver más →</div>
     </div>
-    <div class="serv-card">
+    <div class="serv-card" onclick="openSrvModal('super')">
       <div class="serv-icon">🛒</div>
       <div class="serv-name">Supermercado</div>
+      <div class="serv-tap">Ver más →</div>
     </div>
-    <div class="serv-card">
+    <div class="serv-card" onclick="openSrvModal('farma')">
       <div class="serv-icon">💊</div>
       <div class="serv-name">Farmacia</div>
+      <div class="serv-tap">Ver más →</div>
     </div>
-    <div class="serv-card">
+    <div class="serv-card" onclick="openSrvModal('paquetes')">
       <div class="serv-icon">📦</div>
       <div class="serv-name">Paquetes y documentos</div>
+      <div class="serv-tap">Ver más →</div>
     </div>
-    <div class="serv-card">
+    <div class="serv-card" onclick="openSrvModal('otros')">
       <div class="serv-icon">✨</div>
       <div class="serv-name">Lo que necesites</div>
+      <div class="serv-tap">Ver más →</div>
     </div>
   </div>
+
 </section>
 
 <!-- ─── BENEFICIOS ─── -->
@@ -1455,6 +1530,113 @@
       });
     });
   })();
+</script>
+
+<!-- ─── MODAL SERVICIOS ─── -->
+<div class="srv-modal-overlay" id="srvOverlay" onclick="closeSrvModal(event)">
+  <div class="srv-modal" id="srvModal">
+    <div class="srv-modal-head" id="srvHead" style="position:relative">
+      <div class="srv-modal-head-icon" id="srvIcon">🍔</div>
+      <div>
+        <div class="srv-modal-head-title" id="srvTitle">Comida</div>
+        <div class="srv-modal-head-sub" id="srvSub">Restaurantes y más en Cali</div>
+      </div>
+      <button class="srv-modal-close" onclick="closeSrvModal()">✕</button>
+    </div>
+    <div class="srv-modal-body">
+      <ul id="srvList"></ul>
+      <button class="srv-modal-cta" onclick="closeSrvModal();document.getElementById('descargar')?.scrollIntoView({behavior:'smooth'})">
+        📲 Descargar TROYA gratis
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SRV_DATA = {
+  comida: {
+    icon: '🍔', title: 'Comida a Domicilio',
+    sub: 'Tus restaurantes favoritos en Cali',
+    items: [
+      { icon: '🍕', strong: 'Restaurantes locales y cadenas', text: 'Comida rápida, almuerzos, pizzas, sushi, pollo y mucho más.' },
+      { icon: '⚡', strong: 'Entrega en menos de 40 min', text: 'Repartidores activos cerca de ti para llegar lo más rápido posible.' },
+      { icon: '💳', strong: 'Paga como quieras', text: 'Efectivo, tarjeta débito o crédito directamente en la app.' },
+      { icon: '📍', strong: 'Rastreo en tiempo real', text: 'Sigue el estado de tu pedido desde que sale hasta que llega.' },
+      { icon: '🎁', strong: 'Descuentos y promos', text: 'Accede a ofertas exclusivas de restaurantes aliados de TROYA.' }
+    ]
+  },
+  super: {
+    icon: '🛒', title: 'Supermercado',
+    sub: 'Mercado completo sin salir de casa',
+    items: [
+      { icon: '🥦', strong: 'Frutas, verduras y carnes frescas', text: 'Productos frescos seleccionados de supermercados aliados en Cali.' },
+      { icon: '🧴', strong: 'Aseo, higiene y hogar', text: 'Productos de limpieza, cuidado personal y todo para tu hogar.' },
+      { icon: '🏠', strong: 'Sin filas ni desplazamientos', text: 'Haz tu mercado desde el sofá y recíbelo en la puerta.' },
+      { icon: '📦', strong: 'Pedidos grandes y pequeños', text: 'Desde un par de productos hasta el mercado completo de la semana.' },
+      { icon: '💰', strong: 'Precios de supermercado', text: 'Sin precios inflados — pagas lo mismo que en tienda más el domicilio.' }
+    ]
+  },
+  farma: {
+    icon: '💊', title: 'Farmacia',
+    sub: 'Tu salud, entregada a tiempo',
+    items: [
+      { icon: '💊', strong: 'Medicamentos de marca y genéricos', text: 'Amplio catálogo de medicamentos disponibles en farmacias aliadas.' },
+      { icon: '🌙', strong: 'Disponibilidad 24/7', text: 'Accede a farmacias aliadas con servicio nocturno cuando lo necesites.' },
+      { icon: '⚡', strong: 'Entrega urgente', text: 'Para esas situaciones donde no puedes esperar, TROYA va rápido.' },
+      { icon: '🧴', strong: 'Cuidado personal e higiene', text: 'Vitaminas, suplementos, skincare y productos de bienestar.' },
+      { icon: '🔒', strong: 'Seguro y confiable', text: 'Solo trabajamos con farmacias certificadas y de confianza en Cali.' }
+    ]
+  },
+  paquetes: {
+    icon: '📦', title: 'Paquetes y Documentos',
+    sub: 'Mensajería express en Cali',
+    items: [
+      { icon: '📄', strong: 'Documentos importantes', text: 'Contratos, sobres, carpetas y papeles que necesitan llegar a tiempo.' },
+      { icon: '🎁', strong: 'Paquetes y obsequios', text: 'Envía regalos, productos o cualquier artículo de forma segura.' },
+      { icon: '🏢', strong: 'Ideal para empresas', text: 'Servicios de mensajería recurrente para negocios y oficinas en Cali.' },
+      { icon: '✅', strong: 'Confirmación de entrega', text: 'Recibes notificación cuando el destinatario recibe el paquete.' },
+      { icon: '📍', strong: 'Cualquier punto de Cali', text: 'Norte, sur, oriente, occidente — llegamos a toda la ciudad.' }
+    ]
+  },
+  otros: {
+    icon: '✨', title: 'Lo que Necesites',
+    sub: 'Si está en Cali, TROYA lo lleva',
+    items: [
+      { icon: '👗', strong: 'Ropa y accesorios', text: 'Recibe prendas, calzado y accesorios de tiendas locales de Cali.' },
+      { icon: '🛠️', strong: 'Ferretería y herramientas', text: 'Lo que necesitas para tus proyectos del hogar o la oficina.' },
+      { icon: '🎂', strong: 'Sorpresas y regalos', text: 'Tortas, detalles, flores, y lo que quieras para alguien especial.' },
+      { icon: '📱', strong: 'Accesorios tecnológicos', text: 'Cables, cargadores, audífonos y más desde tiendas aliadas.' },
+      { icon: '💬', strong: '¿No lo ves en la lista?', text: 'Escríbenos y lo gestionamos: hola@troyaapp.com' }
+    ]
+  }
+};
+
+function openSrvModal(key) {
+  const d = SRV_DATA[key];
+  if (!d) return;
+  document.getElementById('srvIcon').textContent = d.icon;
+  document.getElementById('srvTitle').textContent = d.title;
+  document.getElementById('srvSub').textContent = d.sub;
+  const ul = document.getElementById('srvList');
+  ul.innerHTML = d.items.map(i => `
+    <li>
+      <div class="li-icon">${i.icon}</div>
+      <div class="li-text">
+        <strong>${i.strong}</strong>
+        <span>${i.text}</span>
+      </div>
+    </li>`).join('');
+  document.getElementById('srvOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSrvModal(e) {
+  if (e && e.target !== document.getElementById('srvOverlay') && !e.target.classList.contains('srv-modal-close')) return;
+  document.getElementById('srvOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('srvOverlay').classList.remove('open'); document.body.style.overflow = ''; } });
 </script>
 
 </body>

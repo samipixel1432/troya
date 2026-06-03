@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TROYA – Domicilios que te dan más</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="troya.css"/>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-icon">
+      <img src="logo.png" alt="TROYA logo"/>
+    </div>
+    <div class="nav-brand">
+      <div class="nav-brand-name">TROYA</div>
+      <div class="nav-brand-tag">Domicilios que te dan más</div>
+    </div>
+  </a>
+
+  <ul>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#about">Nosotros</a></li>
+    <li><a href="#descarga">Descarga</a></li>
+  </ul>
+
+  <a class="nav-cta" href="#descarga">Descargar App</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-logo-wrap">
+        <img src="logo.png" alt="TROYA"/>
+      </div>
+
+      <div class="hero-pill">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#FF6B00"/></svg>
+        Disponible en Cali, Colombia
+      </div>
+
+      <h1 class="hero-headline">
+        Pide fácil,<br>vive <em>más.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Domicilios rápidos, seguros y con beneficios para ti.
+        Conectamos personas, negocios y repartidores con tecnología eficiente.
+      </p>
+
+      <div class="hero-btns">
+        <!-- Google Play -->
+        <a href="#" class="btn-store">
+          <svg viewBox="0 0 512 512" fill="currentColor">
+            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l232.6-233-232.6-78.9zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c17.4-9.9 17.4-34.9-.2-60.8zm-218.8 40.4L47 512c1.7.8 3.5 1.2 5.3 1.2 8 0 15.6-3.4 21.4-8.8l259-259-26.3-25.4z"/>
+          </svg>
+          <div class="btn-store-label">
+            <span>Disponible en</span>
+            <strong>Google Play</strong>
+          </div>
+        </a>
+        <!-- App Store -->
+        <a href="#" class="btn-store orange">
+          <svg viewBox="0 0 814 1000" fill="currentColor">
+            <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-164-39.3c-76 0-103.7 40.8-165.9 40.8s-105.2-46.4-149.5-105.8C72.2 754.2 32 680.3 32 592.3c0-0 0-0 0-0 0-132.8 86.3-202.9 170.8-202.9 46.2 0 89.8 30.3 119.2 30.3 28.1 0 73.6-33.5 130.5-33.5z"/>
+            <path d="M555.5 2c-13.3 0-33.7 8.5-53.1 18.9-18.3 9.7-35.8 25-47.5 45.3-8.5 14.6-13.4 31.3-13.4 47.3 0 2.2.2 4.3.5 6.2 2.4.2 4.9.4 7.5.4 14.5 0 31.4-7.8 44.4-18 14.6-11.3 26-27.4 31.3-44.6 3.5-10.9 5.5-22.2 5.5-33.7 0-6.5-.9-12.8-2.5-18.7l-12.7-.1z"/>
+          </svg>
+          <div class="btn-store-label">
+            <span>Disponible en</span>
+            <strong>App Store</strong>
+          </div>
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-n">24/7</div>
+          <div class="hstat-l">Servicio continuo</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n">0%</div>
+          <div class="hstat-l">Barrera de entrada</div>
+        </div>
+        <div class="hstat">
+          <div class="hstat-n">Cali</div>
+          <div class="hstat-l">Ciudad de operación</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="hero-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-header-logo">TROYA</div>
+            <svg width="18" height="18" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </div>
+          <div class="phone-search">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            ¿Qué necesitas hoy?
+          </div>
+          <div class="phone-cats">
+            <div class="phone-cat"><div class="phone-cat-icon">🍔</div>Comida</div>
+            <div class="phone-cat"><div class="phone-cat-icon">🛒</div>Supermercado</div>
+            <div class="phone-cat"><div class="phone-cat-icon">💊</div>Farmacia</div>
+            <div class="phone-cat"><div class="phone-cat-icon">📦</div>Paquetes</div>
+          </div>
+          <div class="phone-pedir">Pedir ahora →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES BAR ─── -->
+<section id="features">
+  <div class="features-grid">
+    <div class="feat-item">
+      <div class="feat-icon">🚀</div>
+      <div class="feat-text">
+        <h3>Entregas Rápidas</h3>
+        <p>Siempre a tiempo, en toda la ciudad</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">🔒</div>
+      <div class="feat-text">
+        <h3>Seguro y Confiable</h3>
+        <p>Cuidamos lo que es tuyo</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">🎁</div>
+      <div class="feat-text">
+        <h3>Beneficios Exclusivos</h3>
+        <p>Descuentos y promociones para ti</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="about-inner">
+    <div>
+      <div class="about-label">¿Quiénes somos?</div>
+      <h2 class="about-title">Más que domicilios,<br>oportunidades para ti.</h2>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        Somos una app de domicilios rápidos y seguros que conecta personas, negocios
+        y repartidores. Además, te ofrecemos beneficios exclusivos por ayudarnos a crecer.
+      </p>
+      <p class="about-text">
+        Nacimos en Cali con el propósito de facilitar la vida de las personas mediante
+        entregas rápidas y seguras, mientras creamos oportunidades para que cualquier
+        usuario pueda recibir descuentos y beneficios.
+      </p>
+      <div class="about-highlight">
+        "Cualquier persona puede obtener beneficios promocionando TROYA — sin necesidad de ser influencer."
+      </div>
+    </div>
+    <div class="about-image-block">
+      <div class="about-card-main">
+        <h3>En Números</h3>
+        <div class="about-nums">
+          <div>
+            <div class="anum-n" style="color:var(--orange)">Cali</div>
+            <div class="anum-l">Ciudad principal</div>
+          </div>
+          <div>
+            <div class="anum-n">24/7</div>
+            <div class="anum-l">Disponibilidad</div>
+          </div>
+          <div>
+            <div class="anum-n">5+</div>
+            <div class="anum-l">Categorías</div>
+          </div>
+          <div>
+            <div class="anum-n" style="color:var(--orange)">∞</div>
+            <div class="anum-l">Beneficios</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-badge">
+        <strong>COL</strong>
+        <span>OMbia</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICIOS ─── -->
+<section id="servicios">
+  <div class="section-header">
+    <div class="section-label">Lo que pedís</div>
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <p class="section-sub">Todo lo que necesitas, entregado rápido y seguro en tu puerta.</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="serv-card" onclick="openSrvModal('comida')">
+      <div class="serv-icon">🍔</div>
+      <div class="serv-name">Comida</div>
+      <div class="serv-tap">Ver más →</div>
+    </div>
+    <div class="serv-card" onclick="openSrvModal('super')">
+      <div class="serv-icon">🛒</div>
+      <div class="serv-name">Supermercado</div>
+      <div class="serv-tap">Ver más →</div>
+    </div>
+    <div class="serv-card" onclick="openSrvModal('farma')">
+      <div class="serv-icon">💊</div>
+      <div class="serv-name">Farmacia</div>
+      <div class="serv-tap">Ver más →</div>
+    </div>
+    <div class="serv-card" onclick="openSrvModal('paquetes')">
+      <div class="serv-icon">📦</div>
+      <div class="serv-name">Paquetes y documentos</div>
+      <div class="serv-tap">Ver más →</div>
+    </div>
+    <div class="serv-card" onclick="openSrvModal('otros')">
+      <div class="serv-icon">✨</div>
+      <div class="serv-name">Lo que necesites</div>
+      <div class="serv-tap">Ver más →</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─── BENEFICIOS ─── -->
+<section id="beneficios">
+  <div class="section-header">
+    <div class="section-label">Para ti</div>
+    <h2 class="section-title">Beneficios Exclusivos</h2>
+    <p class="section-sub">TROYA es la única app donde pedir un domicilio también te genera recompensas.</p>
+  </div>
+  <div class="bene-grid">
+    <div class="bene-card">
+      <div class="bene-number">01</div>
+      <div class="bene-icon">💸</div>
+      <div class="bene-title">Descuentos Exclusivos</div>
+      <p class="bene-text">Accede a precios especiales y descuentos únicos disponibles solo para usuarios de la app TROYA.</p>
+    </div>
+    <div class="bene-card">
+      <div class="bene-number">02</div>
+      <div class="bene-icon">🎉</div>
+      <div class="bene-title">Promociones Especiales</div>
+      <p class="bene-text">Recibe promociones personalizadas según tus pedidos más frecuentes y las tiendas que más visitas.</p>
+    </div>
+    <div class="bene-card">
+      <div class="bene-number">03</div>
+      <div class="bene-icon">📣</div>
+      <div class="bene-title">Publicidad con Recompensas</div>
+      <p class="bene-text">Sistema único: comparte TROYA con tus contactos y gana beneficios sin necesidad de ser influencer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PUBLICIDAD INCLUSIVA ─── -->
+<section id="publicidad">
+  <div class="pub-inner">
+    <div>
+      <div class="about-label">Modelo único</div>
+      <h2 class="about-title">Publicidad accesible<br>para <em style="font-style:normal;color:var(--orange)">todos</em></h2>
+      <div class="about-divider"></div>
+      <p class="about-text">
+        En TROYA no necesitas miles de seguidores para ganar. Nuestro modelo
+        de publicidad inclusiva permite que cualquier persona obtenga beneficios
+        ayudando a crecer la comunidad.
+      </p>
+      <div class="pub-steps">
+        <div class="pub-step">
+          <div class="pub-step-num">1</div>
+          <div>
+            <h4>Descarga la app</h4>
+            <p>Disponible en Google Play y App Store, gratis y sin costo de registro.</p>
+          </div>
+        </div>
+        <div class="pub-step">
+          <div class="pub-step-num">2</div>
+          <div>
+            <h4>Comparte con tu comunidad</h4>
+            <p>Recomienda TROYA a amigos, familia o en tus redes sociales.</p>
+          </div>
+        </div>
+        <div class="pub-step">
+          <div class="pub-step-num">3</div>
+          <div>
+            <h4>Gana beneficios</h4>
+            <p>Recibe descuentos, promociones y recompensas exclusivas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pub-visual">
+      <div class="pub-visual-icon">🏆</div>
+      <h3>¿Por qué TROYA?</h3>
+      <p>Somos la única plataforma de domicilios en Cali que combina entregas rápidas con un sistema de beneficios inclusivo para toda la comunidad.</p>
+      <br>
+      <p style="color:var(--orange);font-weight:700;font-size:0.85rem;">
+        "Sin barreras. Sin requisitos de seguidores.<br>Solo TROYA."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DESCARGA CTA ─── -->
+<section id="descarga">
+  <div class="descarga-inner">
+    <div class="descarga-tag">Descárgala ya</div>
+    <h2 class="descarga-title">
+      Pide hoy, recibe rápido<br>y <em>gana más.</em>
+    </h2>
+    <p class="descarga-sub">
+      Descarga TROYA y disfruta de todos los beneficios.<br>
+      Domicilios seguros, rápidos y con recompensas para ti.
+    </p>
+    <div class="descarga-btns">
+      <a href="#" class="btn-store" style="background:#FF6B00">
+        <svg viewBox="0 0 512 512" width="22" height="22" fill="white">
+          <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l232.6-233-232.6-78.9zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c17.4-9.9 17.4-34.9-.2-60.8zm-218.8 40.4L47 512c1.7.8 3.5 1.2 5.3 1.2 8 0 15.6-3.4 21.4-8.8l259-259-26.3-25.4z"/>
+        </svg>
+        <div class="btn-store-label">
+          <span>Disponible en</span>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+      <a href="#" class="btn-store" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15)">
+        <svg viewBox="0 0 814 1000" width="22" height="22" fill="white">
+          <path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.3-164-39.3c-76 0-103.7 40.8-165.9 40.8s-105.2-46.4-149.5-105.8C72.2 754.2 32 680.3 32 592.3c0-132.8 86.3-202.9 170.8-202.9 46.2 0 89.8 30.3 119.2 30.3 28.1 0 73.6-33.5 130.5-33.5z"/>
+          <path d="M555.5 2c-13.3 0-33.7 8.5-53.1 18.9-18.3 9.7-35.8 25-47.5 45.3-8.5 14.6-13.4 31.3-13.4 47.3 0 2.2.2 4.3.5 6.2 2.4.2 4.9.4 7.5.4 14.5 0 31.4-7.8 44.4-18 14.6-11.3 26-27.4 31.3-44.6 3.5-10.9 5.5-22.2 5.5-33.7 0-6.5-.9-12.8-2.5-18.7l-12.7-.1z"/>
+        </svg>
+        <div class="btn-store-label">
+          <span>Disponible en</span>
+          <strong>App Store</strong>
+        </div>
+      </a>
+    </div>
+    <p class="descarga-note">Gratis · Cali, Colombia · @troya.app</p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-icon">
+        <img src="logo.png" alt="TROYA"/>
+      </div>
+      <div class="footer-brand">TROYA</div>
+      <div class="footer-tag">Domicilios que te dan más</div>
+      <p class="footer-desc">La app de domicilios que conecta Cali con rapidez, tecnología y beneficios para todos.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li>Comida</li>
+        <li>Supermercado</li>
+        <li>Farmacia</li>
+        <li>Paquetes</li>
+        <li>Lo que necesites</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#about">Nosotros</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#publicidad">Publicidad</a></li>
+        <li><a href="#descarga">Descarga</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +57 300 123 4567
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hola@troyaapp.com
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        www.troyaapp.com
+      </div>
+      <div class="footer-contact-item">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cali, Colombia
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 TROYA APP · Todos los derechos reservados</p>
+    <div class="footer-social">
+      <a href="#">IG</a>
+      <a href="#">FB</a>
+      <a href="#">TK</a>
+    </div>
+  </div>
+</footer>
+
+<!-- AI CHATBOX -->
+<div class="ai-chat" id="aiChat">
+  <div class="ai-chat-panel" role="dialog" aria-label="Chat inteligente TROYA">
+    <div class="ai-chat-head">
+      <div class="ai-chat-title">
+        <div class="ai-chat-avatar">AI</div>
+        <div>
+          <strong>Asistente TROYA</strong>
+          <span>Pregunta cualquier cosa</span>
+        </div>
+      </div>
+      <button class="ai-chat-close" type="button" id="aiChatClose" aria-label="Cerrar chat">&times;</button>
+    </div>
+
+    <div class="ai-chat-messages" id="aiChatMessages" aria-live="polite">
+      <div class="ai-msg bot">
+        <div class="ai-bubble">¡Hola! 👋 Soy el asistente de TROYA. Puedo contarte todo sobre nuestra app: servicios, beneficios, cómo ganar recompensas, cómo ser repartidor o unir tu negocio. ¿En qué te ayudo?</div>
+      </div>
+      <div class="ai-chat-suggestions" id="aiChatSuggestions">
+        <button class="ai-chip" type="button">¿Qué es TROYA?</button>
+        <button class="ai-chip" type="button">¿Cómo gano beneficios?</button>
+        <button class="ai-chip" type="button">¿Cómo descargo la app?</button>
+        <button class="ai-chip" type="button">Quiero ser repartidor</button>
+      </div>
+    </div>
+
+    <form class="ai-chat-form" id="aiChatForm">
+      <textarea class="ai-chat-input" id="aiChatInput" rows="1" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta"></textarea>
+      <button class="ai-chat-send" type="submit" id="aiChatSend" aria-label="Enviar">></button>
+    </form>
+  </div>
+
+  <button class="ai-chat-toggle" type="button" id="aiChatToggle" aria-label="Abrir chat">AI</button>
+</div>
+
+<script>
+  (function () {
+    const chat = document.getElementById('aiChat');
+    const toggle = document.getElementById('aiChatToggle');
+    const close = document.getElementById('aiChatClose');
+    const form = document.getElementById('aiChatForm');
+    const input = document.getElementById('aiChatInput');
+    const send = document.getElementById('aiChatSend');
+    const messagesEl = document.getElementById('aiChatMessages');
+    const suggestions = document.getElementById('aiChatSuggestions');
+
+    const systemPrompt = [
+      'Eres TroyaBot, el asistente oficial de TROYA, app de domicilios y beneficios en Cali, Colombia.',
+      'Tagline: DOMICILIOS QUE TE DAN MAS.',
+      'Servicios: Comida, Supermercado, Farmacia, Paquetes y documentos, Lo que necesites.',
+      'Beneficios: Descuentos exclusivos, Promociones especiales, Sistema de publicidad con recompensas para cualquier usuario sin necesidad de ser influencer.',
+      'Mision: Brindar domicilios rapidos, seguros y confiables conectando usuarios, comercios y repartidores, impulsando publicidad accesible donde cualquier persona gana beneficios.',
+      'Vision: Ser la app de domicilios mas reconocida e innovadora de Colombia.',
+      'Contacto: +57 300 123 4567 | hola@troyaapp.com | www.troyaapp.com | Cali, Colombia | @troya.app.',
+      'Descarga: Google Play y App Store, gratis.',
+      'Modelo de publicidad inclusiva: descarga la app, comparte con tu comunidad, gana beneficios y descuentos.',
+      'Objetivo general: app de domicilios innovadora con entregas rapidas y beneficios accesibles para todos en Cali.',
+      'Responde siempre en espanol claro, amigable y util. Prioriza informacion sobre TROYA. Para temas ajenos, ayuda brevemente y redirige a TROYA cuando tenga sentido.'
+    ].join(' ');
+
+    const conversation = [
+      { role: 'system', content: systemPrompt }
+    ];
+
+    function setOpen(isOpen) {
+      chat.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) setTimeout(() => input.focus(), 120);
+    }
+
+    function scrollMessages() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function addMessage(role, text, options) {
+      const msg = document.createElement('div');
+      msg.className = 'ai-msg ' + role;
+      if (options && options.loading) msg.dataset.loading = 'true';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-bubble';
+      bubble.textContent = text;
+      msg.appendChild(bubble);
+      messagesEl.appendChild(msg);
+      scrollMessages();
+      return msg;
+    }
+
+    function addTyping() {
+      const msg = document.createElement('div');
+      msg.className = 'ai-msg bot';
+      msg.dataset.loading = 'true';
+      msg.innerHTML = '<div class="ai-bubble"><span class="ai-typing" aria-label="Pensando"><i></i><i></i><i></i></span></div>';
+      messagesEl.appendChild(msg);
+      scrollMessages();
+      return msg;
+    }
+
+    function responseToText(response) {
+      if (typeof response === 'string') return response;
+
+      const content = response && response.message && response.message.content;
+      if (typeof content === 'string') return content;
+      if (Array.isArray(content)) {
+        return content.map(function (item) {
+          if (typeof item === 'string') return item;
+          return item.text || item.content || '';
+        }).join('').trim();
+      }
+
+      if (response && response.choices && response.choices[0] && response.choices[0].message) {
+        return response.choices[0].message.content || '';
+      }
+
+      return response && response.text ? response.text : '';
+    }
+
+    function withTimeout(promise, ms) {
+      let timer;
+      const timeout = new Promise(function (_, reject) {
+        timer = setTimeout(function () {
+          reject(new Error('La respuesta tardo demasiado.'));
+        }, ms);
+      });
+
+      return Promise.race([promise, timeout]).finally(function () {
+        clearTimeout(timer);
+      });
+    }
+
+    function currentMessages() {
+      return [conversation[0]].concat(conversation.slice(1).slice(-12));
+    }
+
+    function lastUserQuestion() {
+      for (let i = conversation.length - 1; i >= 0; i -= 1) {
+        if (conversation[i].role === 'user') return conversation[i].content.trim();
+      }
+
+      return '';
+    }
+
+    // ── Base de conocimiento TROYA ──────────────────────────────────────
+    const KB = [
+      {
+        keys: ['qué es troya','que es troya','troya app','cuéntame de troya','cuentame de troya','sobre troya','info de troya','información de troya'],
+        ans: 'TROYA es una app de domicilios en Cali, Colombia 🛵\n\nNuestra propuesta es simple: "DOMICILIOS QUE TE DAN MÁS". Conectamos personas, negocios y repartidores con tecnología eficiente y además te recompensamos por ayudar a crecer la comunidad.\n\n✅ Entregas rápidas y seguras\n✅ Beneficios exclusivos para usuarios\n✅ Sistema de publicidad accesible sin requisitos de seguidores\n\n¿Quieres saber cómo funciona, cuáles son los servicios o cómo ganar beneficios?'
+      },
+      {
+        keys: ['cómo funciona','como funciona','cómo se usa','como se usa','pasos','proceso','hacer un pedido','pedir'],
+        ans: 'Usar TROYA es muy fácil:\n\n1️⃣ Descarga la app gratis en Google Play o App Store\n2️⃣ Crea tu cuenta en minutos\n3️⃣ Elige lo que necesitas: comida, supermercado, farmacia, paquetes…\n4️⃣ Un repartidor lo recoge y te lo lleva rápido y seguro\n5️⃣ ¡Gana beneficios y descuentos con cada pedido!\n\n¿Tienes alguna duda del proceso?'
+      },
+      {
+        keys: ['servicios','qué ofrecen','que ofrecen','qué pido','que pido','categorías','categorias','qué puedo pedir','que puedo pedir'],
+        ans: 'En TROYA puedes pedir de todo 📦\n\n🍔 Comida – Restaurantes y antojos\n🛒 Supermercado – Mercado sin salir de casa\n💊 Farmacia – Medicamentos y salud\n📦 Paquetes y documentos – Envíos rápidos\n✨ Lo que necesites – Cualquier encargo especial\n\nTodo entregado rápido, seguro y en tu puerta. ¿Sobre cuál servicio quieres saber más?'
+      },
+      {
+        keys: ['beneficios','descuentos','recompensas','ganancias','ganar','qué gano','que gano','ventajas'],
+        ans: 'Con TROYA ganas más que solo domicilios 🎁\n\n💸 Descuentos exclusivos – Solo para usuarios de la app\n🎉 Promociones especiales – Según tus pedidos frecuentes\n📣 Publicidad con recompensas – Comparte TROYA y gana beneficios sin ser influencer\n\nNuestro modelo es único: cualquier persona puede obtener beneficios ayudando a crecer la comunidad. Sin barreras, sin requisitos de seguidores.'
+      },
+      {
+        keys: ['descargar','descarga','instalar','instala','google play','app store','donde descargo','dónde descargo','cómo descargo','como descargo'],
+        ans: 'Descargar TROYA es gratis 📲\n\n▶️ Google Play: busca "TROYA App" en la Play Store\n🍎 App Store: busca "TROYA App" en el App Store\n\nEs completamente gratis. Solo crea tu cuenta y empieza a pedir con beneficios. ¿Necesitas ayuda para registrarte?'
+      },
+      {
+        keys: ['repartidor','domiciliario','trabajar','trabajo','empleo','unirse','ser repartidor','quiero repartir'],
+        ans: 'Quieres unirte como repartidor TROYA 🏍️\n\nSer parte de nuestro equipo tiene ventajas:\n✅ Horarios flexibles\n✅ Ganas por cada entrega\n✅ Soporte de la plataforma\n✅ Comunidad de repartidores\n\nPara aplicar contáctanos:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n\nNos ponemos en contacto contigo rápidamente.'
+      },
+      {
+        keys: ['negocio','restaurante','tienda','comercio','aliado','registrar negocio','unir negocio','mi negocio','empresa'],
+        ans: 'Registrar tu negocio en TROYA es una gran oportunidad 🏪\n\n¿Por qué unirte?\n✅ Mayor visibilidad en Cali\n✅ Nuevos clientes sin invertir en publicidad propia\n✅ Plataforma digital moderna\n✅ Apoyo a negocios locales\n\nContacta nuestro equipo:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n\n¡Nos encantaría tener tu negocio en TROYA!'
+      },
+      {
+        keys: ['publicidad','promocionar','marketing','referido','compartir','cómo promociono','como promociono','ganar sin seguidores','sin ser influencer'],
+        ans: 'El sistema de publicidad de TROYA es único 📣\n\nAsí funciona:\n1️⃣ Descarga y usa la app\n2️⃣ Comparte TROYA con amigos, familia o en redes\n3️⃣ Cada persona que se una gracias a ti te genera beneficios\n\n🔑 Lo diferente: NO necesitas miles de seguidores. Cualquier persona puede participar y ganar recompensas.\n\n¿Quieres saber exactamente qué beneficios puedes ganar?'
+      },
+      {
+        keys: ['contacto','teléfono','telefono','email','correo','whatsapp','redes sociales','instagram','donde los encuentro','dónde los encuentro'],
+        ans: 'Puedes contactar a TROYA así 📬\n\n📞 Teléfono: +57 300 123 4567\n📧 Email: hola@troyaapp.com\n🌐 Web: www.troyaapp.com\n📍 Ciudad: Cali, Colombia\n📱 Instagram/TikTok: @troya.app\n\n¡Estamos disponibles para ayudarte!'
+      },
+      {
+        keys: ['precio','costo','cuánto cuesta','cuanto cuesta','gratis','cobro','tarifa','cuánto vale','cuanto vale'],
+        ans: 'TROYA es gratis de descargar 🆓\n\nLa app no tiene costo de registro. Pagas únicamente el domicilio de tu pedido, que es muy accesible. Además puedes ganar descuentos y beneficios que reducen aún más el costo.\n\nSin mensualidades, sin cuotas de membresía. ¡Solo pide y gana!'
+      },
+      {
+        keys: ['dónde operan','donde operan','ciudades','cobertura','cali','zonas','barrios','dónde llegan','donde llegan'],
+        ans: 'Por ahora TROYA opera en Cali, Colombia 📍\n\nEstamos creciendo para cubrir más zonas de la ciudad y próximamente más ciudades del país. Nuestra visión es ser la app de domicilios más reconocida de Colombia.\n\n¿Quieres recibir novedades sobre la expansión? Síguenos en @troya.app'
+      },
+      {
+        keys: ['misión','mision','visión','vision','valores','propósito','proposito','quiénes son','quienes son'],
+        ans: 'La misión y visión de TROYA 🎯\n\n🚀 MISIÓN:\nBrindar domicilios rápidos, seguros y confiables, conectando usuarios, comercios y repartidores con tecnología eficiente, impulsando una comunidad de publicidad accesible donde cualquier persona pueda ganar beneficios.\n\n🏆 VISIÓN:\nSer una de las apps de domicilios más reconocidas e innovadoras de Colombia, destacándonos por servicio eficiente y modelo de publicidad inclusiva.\n\n💡 Concepto: Rapidez · Tecnología · Beneficios para todos'
+      },
+      {
+        keys: ['problema','solución','solucion','por qué nació','por que nacio','origen','idea'],
+        ans: 'TROYA nació para resolver un problema real 💡\n\nEn Cali existían pocas apps de domicilios que ofrecieran beneficios accesibles. Las plataformas existentes:\n❌ Solo se enfocaban en entregas\n❌ Ignoraban a la comunidad\n❌ Exigían miles de seguidores para publicitar\n\nTROYA llegó para cambiar eso: entregas rápidas + beneficios para TODOS, sin importar cuántos seguidores tengas.'
+      },
+      {
+        keys: ['seguridad','seguro','confiable','protección','proteccion','confianza','robo','pérdida','perdida'],
+        ans: 'La seguridad es prioridad en TROYA 🔒\n\n✅ Repartidores verificados\n✅ Seguimiento en tiempo real de tu pedido\n✅ Soporte disponible si algo sale mal\n✅ Cuidamos lo que es tuyo durante todo el trayecto\n\nPuedes pedir tranquilo sabiendo que tu pedido llega seguro. ¿Tienes alguna duda específica sobre seguridad?'
+      },
+      {
+        keys: ['hola','buenos días','buenas tardes','buenas noches','hi','hey','saludos'],
+        ans: '¡Hola! 👋 Bienvenido al chat de TROYA.\n\nSoy tu asistente y estoy aquí para ayudarte con:\n• Información sobre la app\n• Cómo pedir domicilios\n• Cómo ganar beneficios\n• Ser repartidor o aliado\n• Contacto con el equipo\n\n¿Con qué te ayudo hoy?'
+      },
+      {
+        keys: ['gracias','muchas gracias','ok gracias','listo','perfecto','excelente'],
+        ans: '¡Con gusto! 😊 Para eso estamos en TROYA.\n\nRecuerda que puedes descargarnos en Google Play y App Store. Cualquier otra duda, aquí estoy. ¡Hasta pronto! 🛵🧡'
+      }
+    ];
+
+    function localAssistantAnswer(question) {
+      const text = question.toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '') // quitar tildes
+        .trim();
+
+      if (!text) {
+        return '¡Hola! Estoy aquí para responder todo sobre TROYA 🛵 ¿Qué quieres saber? Puedes preguntar sobre servicios, beneficios, cómo descargar la app, ser repartidor, unir tu negocio o contactarnos.';
+      }
+
+      // Buscar en la base de conocimiento
+      for (const entry of KB) {
+        for (const key of entry.keys) {
+          const cleanKey = key.normalize('NFD').replace(/[̀-ͯ]/g, '');
+          if (text.includes(cleanKey)) return entry.ans;
+        }
+      }
+
+      // Palabras sueltas de respaldo
+      if (/(troya|app|domicilio|entrega|pedido)/.test(text)) {
+        return 'TROYA es tu app de domicilios en Cali con beneficios para todos 🛵\n\nPuedo contarte sobre:\n• Servicios disponibles\n• Cómo ganar descuentos y recompensas\n• Cómo descargar la app\n• Cómo unirte como repartidor o negocio\n\n¿Qué te interesa saber?';
+      }
+
+      if (/(precio|costo|cuesta|gratis|cobr|tarif)/.test(text)) {
+        return 'La app TROYA es gratis 🆓 Solo pagas el domicilio de tu pedido, sin mensualidades ni cuotas. ¡Y además puedes ganar descuentos que lo hacen aún más económico!';
+      }
+
+      if (/(repartidor|domiciliario|trabajo|empleo|trabajar|ganar plata|dinero)/.test(text)) {
+        return 'Para unirte como repartidor TROYA contacta nuestro equipo:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n\n¡Horarios flexibles y ganas por cada entrega!';
+      }
+
+      if (/(negocio|restaurante|tienda|comercio|aliado)/.test(text)) {
+        return 'Para registrar tu negocio en TROYA y llegar a más clientes en Cali, escríbenos:\n📧 hola@troyaapp.com\n📞 +57 300 123 4567\n\n¡Apoyamos a los negocios locales!';
+      }
+
+      if (/(contac|teléfon|telefon|email|correo|whatsapp|redes|instagram)/.test(text)) {
+        return '📬 Contacta a TROYA:\n📞 +57 300 123 4567\n📧 hola@troyaapp.com\n🌐 www.troyaapp.com\n📱 @troya.app';
+      }
+
+      // Respuesta genérica útil
+      return 'Gracias por escribirnos 🧡 Puedo ayudarte con información sobre TROYA. Aquí algunas cosas que puedo contarte:\n\n• ¿Qué es TROYA y cómo funciona?\n• Servicios disponibles\n• Cómo ganar beneficios y descuentos\n• Cómo descargar la app\n• Ser repartidor o registrar tu negocio\n• Contacto con el equipo\n\n¿Cuál de estos temas te interesa?';
+    }
+
+    function localChatResponse() {
+      return {
+        choices: [
+          {
+            message: {
+              role: 'assistant',
+              content: localAssistantAnswer(lastUserQuestion())
+            }
+          }
+        ]
+      };
+    }
+
+    async function askAI() {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: currentMessages() })
+      });
+
+      if (!response.ok) {
+        return localChatResponse();
+      }
+
+      return await response.json();
+    }
+
+    async function handleSubmit(event) {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question || send.disabled) return;
+
+      if (suggestions) suggestions.remove();
+      addMessage('user', question);
+      conversation.push({ role: 'user', content: question });
+      input.value = '';
+      input.style.height = '48px';
+      send.disabled = true;
+
+      const loading = addTyping();
+      const patienceNote = setTimeout(function () {
+        const bubble = loading.querySelector('.ai-bubble');
+        if (bubble) bubble.textContent = 'Sigo trabajando la respuesta para no dejarte frenado...';
+      }, 9000);
+
+      try {
+        const response = await withTimeout(askAI(), 30000);
+        const answer = responseToText(response) || 'Puedo ayudarte a avanzar: reformula la pregunta con un poco mas de contexto y te doy una respuesta mas precisa.';
+        loading.remove();
+        addMessage('bot', answer);
+        conversation.push({ role: 'assistant', content: answer });
+      } catch (error) {
+        loading.remove();
+        const answer = localAssistantAnswer(question);
+        addMessage('bot', answer);
+        conversation.push({ role: 'assistant', content: answer });
+      } finally {
+        clearTimeout(patienceNote);
+        send.disabled = false;
+        input.focus();
+      }
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(!chat.classList.contains('open'));
+    });
+
+    close.addEventListener('click', function () {
+      setOpen(false);
+    });
+
+    form.addEventListener('submit', handleSubmit);
+
+    input.addEventListener('input', function () {
+      input.style.height = '48px';
+      input.style.height = Math.min(input.scrollHeight, 110) + 'px';
+    });
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    document.querySelectorAll('.ai-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        input.value = chip.textContent;
+        form.requestSubmit();
+      });
+    });
+  })();
+</script>
+
+<!-- ─── MODAL SERVICIOS ─── -->
+<div class="srv-modal-overlay" id="srvOverlay" onclick="closeSrvModal(event)">
+  <div class="srv-modal" id="srvModal">
+    <div class="srv-modal-head" id="srvHead" style="position:relative">
+      <div class="srv-modal-head-icon" id="srvIcon">🍔</div>
+      <div>
+        <div class="srv-modal-head-title" id="srvTitle">Comida</div>
+        <div class="srv-modal-head-sub" id="srvSub">Restaurantes y más en Cali</div>
+      </div>
+      <button class="srv-modal-close" onclick="closeSrvModal()">✕</button>
+    </div>
+    <div class="srv-modal-body">
+      <ul id="srvList"></ul>
+      <button class="srv-modal-cta" onclick="closeSrvModal();document.getElementById('descargar')?.scrollIntoView({behavior:'smooth'})">
+        📲 Descargar TROYA gratis
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SRV_DATA = {
+  comida: {
+    icon: '🍔', title: 'Comida a Domicilio',
+    sub: 'Tus restaurantes favoritos en Cali',
+    items: [
+      { icon: '🍕', strong: 'Restaurantes locales y cadenas', text: 'Comida rápida, almuerzos, pizzas, sushi, pollo y mucho más.' },
+      { icon: '⚡', strong: 'Entrega en menos de 40 min', text: 'Repartidores activos cerca de ti para llegar lo más rápido posible.' },
+      { icon: '💳', strong: 'Paga como quieras', text: 'Efectivo, tarjeta débito o crédito directamente en la app.' },
+      { icon: '📍', strong: 'Rastreo en tiempo real', text: 'Sigue el estado de tu pedido desde que sale hasta que llega.' },
+      { icon: '🎁', strong: 'Descuentos y promos', text: 'Accede a ofertas exclusivas de restaurantes aliados de TROYA.' }
+    ]
+  },
+  super: {
+    icon: '🛒', title: 'Supermercado',
+    sub: 'Mercado completo sin salir de casa',
+    items: [
+      { icon: '🥦', strong: 'Frutas, verduras y carnes frescas', text: 'Productos frescos seleccionados de supermercados aliados en Cali.' },
+      { icon: '🧴', strong: 'Aseo, higiene y hogar', text: 'Productos de limpieza, cuidado personal y todo para tu hogar.' },
+      { icon: '🏠', strong: 'Sin filas ni desplazamientos', text: 'Haz tu mercado desde el sofá y recíbelo en la puerta.' },
+      { icon: '📦', strong: 'Pedidos grandes y pequeños', text: 'Desde un par de productos hasta el mercado completo de la semana.' },
+      { icon: '💰', strong: 'Precios de supermercado', text: 'Sin precios inflados — pagas lo mismo que en tienda más el domicilio.' }
+    ]
+  },
+  farma: {
+    icon: '💊', title: 'Farmacia',
+    sub: 'Tu salud, entregada a tiempo',
+    items: [
+      { icon: '💊', strong: 'Medicamentos de marca y genéricos', text: 'Amplio catálogo de medicamentos disponibles en farmacias aliadas.' },
+      { icon: '🌙', strong: 'Disponibilidad 24/7', text: 'Accede a farmacias aliadas con servicio nocturno cuando lo necesites.' },
+      { icon: '⚡', strong: 'Entrega urgente', text: 'Para esas situaciones donde no puedes esperar, TROYA va rápido.' },
+      { icon: '🧴', strong: 'Cuidado personal e higiene', text: 'Vitaminas, suplementos, skincare y productos de bienestar.' },
+      { icon: '🔒', strong: 'Seguro y confiable', text: 'Solo trabajamos con farmacias certificadas y de confianza en Cali.' }
+    ]
+  },
+  paquetes: {
+    icon: '📦', title: 'Paquetes y Documentos',
+    sub: 'Mensajería express en Cali',
+    items: [
+      { icon: '📄', strong: 'Documentos importantes', text: 'Contratos, sobres, carpetas y papeles que necesitan llegar a tiempo.' },
+      { icon: '🎁', strong: 'Paquetes y obsequios', text: 'Envía regalos, productos o cualquier artículo de forma segura.' },
+      { icon: '🏢', strong: 'Ideal para empresas', text: 'Servicios de mensajería recurrente para negocios y oficinas en Cali.' },
+      { icon: '✅', strong: 'Confirmación de entrega', text: 'Recibes notificación cuando el destinatario recibe el paquete.' },
+      { icon: '📍', strong: 'Cualquier punto de Cali', text: 'Norte, sur, oriente, occidente — llegamos a toda la ciudad.' }
+    ]
+  },
+  otros: {
+    icon: '✨', title: 'Lo que Necesites',
+    sub: 'Si está en Cali, TROYA lo lleva',
+    items: [
+      { icon: '👗', strong: 'Ropa y accesorios', text: 'Recibe prendas, calzado y accesorios de tiendas locales de Cali.' },
+      { icon: '🛠️', strong: 'Ferretería y herramientas', text: 'Lo que necesitas para tus proyectos del hogar o la oficina.' },
+      { icon: '🎂', strong: 'Sorpresas y regalos', text: 'Tortas, detalles, flores, y lo que quieras para alguien especial.' },
+      { icon: '📱', strong: 'Accesorios tecnológicos', text: 'Cables, cargadores, audífonos y más desde tiendas aliadas.' },
+      { icon: '💬', strong: '¿No lo ves en la lista?', text: 'Escríbenos y lo gestionamos: hola@troyaapp.com' }
+    ]
+  }
+};
+
+function openSrvModal(key) {
+  const d = SRV_DATA[key];
+  if (!d) return;
+  document.getElementById('srvIcon').textContent = d.icon;
+  document.getElementById('srvTitle').textContent = d.title;
+  document.getElementById('srvSub').textContent = d.sub;
+  const ul = document.getElementById('srvList');
+  ul.innerHTML = d.items.map(i => `
+    <li>
+      <div class="li-icon">${i.icon}</div>
+      <div class="li-text">
+        <strong>${i.strong}</strong>
+        <span>${i.text}</span>
+      </div>
+    </li>`).join('');
+  document.getElementById('srvOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSrvModal(e) {
+  if (e && e.target !== document.getElementById('srvOverlay') && !e.target.classList.contains('srv-modal-close')) return;
+  document.getElementById('srvOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('srvOverlay').classList.remove('open'); document.body.style.overflow = ''; } });
+</script>
+
+</body>
+</html>
+
